@@ -1,0 +1,86 @@
+<main>
+  <div class="login-container">
+    <div class="social-media">
+      <!-- create google account -->
+      <a
+        href=""
+      >
+        <button class="google">
+          <img
+            src="assets/svg/google.svg"
+            alt="google logo"
+            height="25"
+            width="25"
+          />
+          Log in with Google
+        </button>
+      </a>
+      <!-- create google account -->
+      <a
+        href=""
+      >
+        <button class="google">
+          <img
+            src="assets/svg/facebook.svg"
+            alt="google logo"
+            height="25"
+            width="25"
+          />
+          Log in Facebook
+        </button>
+      </a>
+<!-- create google account -->
+      <a
+        href=""
+      >
+        <button class="apple">
+          <img
+            src="assets/svg/apple.svg"
+            alt="google logo"
+            height="25"
+            width="25"
+          />
+          Log in with Apple
+        </button>
+      </a>
+    </div>
+
+    <div class="or-email">
+      <hr />
+      <span>or email</span>
+    </div>
+
+    <form #form (ngSubmit)="login(form)">
+      <label>Email</label>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Enter your email address or username"
+        #emailField="ngModel"
+        minlength="8"
+        required
+      />
+
+      <label>Password</label>
+      <input
+        type="text"
+        [(ngModel)]="password"
+        name="email"
+        placeholder="Enter your password"
+        aria-placeholder="Enter your password"
+        #passwordField="ngModel"
+        minlength="8"
+        required
+      />
+
+      <pre>
+        By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></pre>
+
+        <button class="submit" type="submit">Log in</button>
+        <button class="sign-up" type="text">New to Question Plus? Create your account</button>
+        
+    </form>
+
+  </div>
+</main>

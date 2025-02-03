@@ -1,0 +1,36 @@
+.sign-up-container {
+    display: flex;
+    height: calc(100vh - 100px);
+    .image-container {
+        
+        width: 50%;
+        height: 100%;
+        position: relative;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            position: relative;
+        }
+        h1 {
+            position: absolute;
+            top: 20px;
+            padding: 2rem;
+        }
+
+        h2 {
+            position: absolute;
+            bottom: 20px;
+            padding: 2rem;
+        }
+    }
+
+    .sign-up-login-tabs {
+        width: 50%;
+        padding: 75px 185px;
+       
+        p-tabpanel {
+            padding: 0 185px;
+        }
+    }
+}

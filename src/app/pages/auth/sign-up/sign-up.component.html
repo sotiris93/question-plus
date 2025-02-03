@@ -1,0 +1,166 @@
+<div class="sign-up-container">
+  <div class="social-media">
+    <!-- create google account -->
+    <a
+      href=""
+    >
+      <button class="google">
+        <img
+          src="assets/svg/google.svg"
+          alt="google logo"
+          height="30"
+          width="30"
+        />
+        Continue with Google
+      </button>
+    </a>
+
+    <!-- create google account -->
+    <a
+      href="">
+      <button class="facebook">
+        <img
+          src="assets/svg/facebook.svg"
+          alt="facebook logo"
+          height="30"
+          width="30"
+        />
+      </button>
+    </a>
+  </div>
+
+  <div class="email-data">
+    <div class="or-email">
+      <hr />
+      <span>or email</span>
+    </div>
+
+    <form #form="ngForm" (ngSubmit)="signup(form)">
+      <div class="birthday">
+        <h3>Birthday</h3>
+        <i
+          class="pi pi-info-circle"
+          pTooltip="Please provide your day of birth"
+        ></i>
+      </div>
+      <div class="card flex justify-center">
+        <p-select
+          name="month"
+          [options]="months"
+          [(ngModel)]="selectedMonth"
+          placeholder="Month"
+          class="w-full md:w-56"
+          required
+        />
+        <p-select
+          name="day"
+          [options]="days"
+          [(ngModel)]="selectedDay"
+          placeholder="Day"
+          class="w-full md:w-56"
+          required
+        />
+        <p-select
+          name="year"
+          [options]="years"
+          [(ngModel)]="selectedYear"
+          placeholder="Year"
+          class="w-full md:w-56"
+          required
+        />
+      </div>
+
+      <label class="email"> Email </label>
+      <input
+        type="email"
+        placeholder="user@email.com"
+        name="email"
+        required
+        [(ngModel)]="email"
+        #emailField="ngModel"
+      />
+      @if (emailField.invalid && emailField.touched) {
+      <div class="error">
+        @if (emailField.errors?.['required']) {
+        <p>Email is required</p>
+        } @if (emailField.errors?.['email']) {
+        <p>Email format is incorrect</p>
+        }
+      </div>
+      }
+
+      <label class="username"> Username </label>
+      <input
+        type="text"
+        placeholder="john12345"
+        name="username"
+        [(ngModel)]="username"
+        #usernameField="ngModel"
+        required
+        minlength="5"
+        maxlength="15"
+      />
+
+      @if (usernameField.invalid && usernameField.touched) {
+      <div class="error">
+        @if (usernameField.errors?.['required']) {
+        <p>Username is required</p>
+        } @if (usernameField.errors?.['minlength']) {
+        <p>Username must be at least 5 characters long</p>
+        } @if (usernameField.errors?.['maxlength']) {
+        <p>Username cannot exceed 15 characters</p>
+        }
+      </div>
+
+      }
+      <label class="password"> Password </label>
+      <input
+        type="password"
+        name="password"
+        placeholder="●●●●●●●●"
+        [(ngModel)]="password"
+        #passwordField="ngModel"
+        minlength="8"
+        required=""
+      />
+
+      @if (passwordField.invalid && passwordField.touched) {
+      <div class="error">
+        @if (passwordField.errors?.['required']) {
+        <p>Password is required</p>
+        } @if (passwordField.errors?.['minlength']) {
+        <p>Password must be at least 8 characters long</p>
+        }
+      </div>
+      }
+
+      <label class="updates">
+        <input
+          type="checkbox"
+          id="vehicle2"
+          name="updates"
+          value="updates"
+          [(ngModel)]="isReceiveUpdates"
+        />
+        I want to receive news, updates and emails from Question plus
+      </label>
+
+      <label class="policy">
+        <input
+          type="checkbox"
+          id="termsofService"
+          name="termsofService"
+          value="terms"
+          [(ngModel)]="isAcceptTerms"
+        />
+        <pre>I accept Questions Plus'<a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service</a
+        ></pre>
+      </label>
+
+      <button class="submit" type="submit" [disabled]="form.invalid">
+        Sign up
+      </button>
+      <button class="login">Already have an account? Log in</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="card-content-container">
+    <h2 id="card-content-heading">{{ title }}</h2>
+    <p-carousel
+      [value]="items"
+      [numVisible]="numVisible"
+      [numScroll]="numScroll"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template pTemplate="item" let-item>
+        <ng-content [ngTemplateOutletContext]="{ item: item }"></ng-content>
+      </ng-template>
+    </p-carousel>
+  </div>
+  

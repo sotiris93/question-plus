@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SideBarComponent } from '../../shared/side-bar/side-bar.component';
 import { ProfileProgressComponent } from '../profile-progress/profile-progress.component';
 import { LandingPageService } from '../../services/landing-page.service';
-import { PopularFlashCards } from '../../models/PopularFlashCards.model';
-import { PopularQuestion } from '../../models/PopularQuestion.model';
-import { PopularTextBooks } from '../../models/PopularTextBook.model';
+import { PopularFlashCards } from '../../models/popular-flashcards.model';
+import { PopularQuestion } from '../../models/popular-question.model';
+import { PopularTextBooks } from '../../models/popular-textbook.model';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -46,7 +46,7 @@ export class LandingPageComponent implements OnInit {
 
   getPopularFlashCards() {
     this.landingPageService.getPopularFlashCards().subscribe({
-      next: (response) => {
+      next: (response: { [key: string]: PopularFlashCards }) => {
         this.popularFlashCards = Object.values(response);
       },
       error: (error) => {
@@ -60,7 +60,7 @@ export class LandingPageComponent implements OnInit {
 
   retrievePopularTextBooks() {
     this.landingPageService.getPopularTextbooks().subscribe({
-      next: (response) => {
+      next: (response: { [key: string]: PopularTextBooks }) => {
         this.popularTextBooks = Object.values(response);
       },
       error: (error) => {
@@ -74,7 +74,7 @@ export class LandingPageComponent implements OnInit {
 
   retrievePopularQuestions() {
     this.landingPageService.getPopularQuestions().subscribe({
-      next: (response) => {
+      next: (response: { [key: string]: PopularQuestion }) => {
         this.popularQuestions = Object.values(response);
         console.log(this.popularQuestions);
       },

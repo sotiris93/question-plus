@@ -1,0 +1,21 @@
+.my-library-container {
+  background: #f6f7fb;
+  height: 100vh;
+
+  p-tabs {
+    background: transparent;
+  }
+
+  p-tablist {
+    background: transparent;
+  }
+  p-tabpanels {
+    background: transparent;
+  }
+
+  ::ng-deep {
+    .p-tablist-tab-list {
+      background: transparent;
+    }
+  }
+}

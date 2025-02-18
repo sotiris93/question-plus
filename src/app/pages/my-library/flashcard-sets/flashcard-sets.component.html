@@ -1,0 +1,39 @@
+<div class="flashcards-container">
+
+        <button (click)="isDropdownOpen = !isDropdownOpen; $event.stopPropagation()"
+        aria-haspopup="true"
+        [attr.aria-expanded]="isDropdownOpen">
+            <span>{{selectedCategory | titlecase}} </span>
+            <i class="pi pi-angle-down"></i>
+        </button>
+   
+
+    @if (isDropdownOpen) {
+        <div class="dropdown" (click)="isDropdownOpen = false">
+            
+                @for (category of categories; track $index) {
+                    <p (click)="selectedCategory = category" tab>{{category}}</p>
+                }
+        </div>
+    }
+
+    <div class="user-data">
+
+        @for (data of userLibraryData.created; track $index) {
+            {{data}}
+        }
+
+        @if (userLibraryData.created.length === 0 && selectedCategory === 'created') {
+          <p>You don't have any created flashcards yet</p>
+        }
+
+        @else if (userLibraryData.created.length === 0 && selectedCategory === 'recent') {
+            <p>You don't have any recent flashcards yet</p>
+        }
+
+        @else if (userLibraryData.created.length === 0 && selectedCategory === 'studied') {
+            <p>You don't have any studied flashcards yet</p>
+        }
+      </div>
+    
+</div>

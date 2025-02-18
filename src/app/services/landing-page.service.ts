@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PopularFlashCards } from '../models/PopularFlashCards.model';
-import { PopularTextBooks } from '../models/PopularTextBook.model';
-import { PopularQuestion } from '../models/PopularQuestion.model';
+import { PopularFlashCards } from '../models/popular-flashcards.model';
+import { PopularTextBooks } from '../models/popular-textbook.model';
+import { PopularQuestion } from '../models/popular-question.model';
 
 @Injectable({
   providedIn: 'root',

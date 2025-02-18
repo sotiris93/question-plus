@@ -1,0 +1,49 @@
+.flashcards-container {
+   
+    color: rgb(88,99,128);
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 0.5rem;
+      border: 2px solid rgb(217, 221, 232);
+      background: transparent;
+      border-radius: 8px;
+      height: 40px;
+      width: 100px;
+      cursor: pointer;
+      color: rgb(88,99,128);
+      
+
+      span {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      i {
+        font-size: 15px;
+      }
+  }
+
+  .dropdown {
+    height: fit-content;
+    max-height: 500px;
+    width: 200px;
+    padding: 0.5rem 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    p {
+        list-style-type: none;
+        font-size: 20px;
+        padding: 1rem 1rem;
+        margin: 0;
+        cursor: pointer;
+
+        &:hover {
+            background: rgb(217, 221, 232);
+        }
+    }
+  }
+}

@@ -10,36 +10,26 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-my-library',
-  imports: [
-    TabsModule,
-    FlashcardSetsComponent,
-    ExpertSolutionsComponent,
-    FoldersComponent,
-    ClassesComponent,
-    FormsModule,
-    CommonModule,
-    RouterModule,
-  ],
+  imports: [TabsModule, FormsModule, CommonModule, RouterModule],
   templateUrl: './my-library.component.html',
   styleUrl: './my-library.component.scss',
 })
 export class MyLibraryComponent implements OnInit {
   tabs: { title: string; path: string }[] = [
-    {
-      title: 'Flashcards',
-      path: 'flashcards',
-    },
-    {
-      title: 'Expert Solutions',
-      path: 'expert-solutions',
-    },
+    { title: 'Flashcards', path: 'flashcards' },
+    { title: 'Expert Solutions', path: 'expert-solutions' },
     { title: 'Folders', path: 'folders' },
     { title: 'Classes', path: 'classes' },
   ];
 
   selectedTabIndex: number = 0;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const tabIndex = +this.route.snapshot.queryParams['tabIndex'];
+    if (!!this.tabs[tabIndex]) {
+      this.selectedTabIndex = tabIndex;
+    }
+  }
 }

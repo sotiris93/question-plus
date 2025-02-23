@@ -9,20 +9,18 @@ import { PopularQuestion } from '../models/popular-question.model';
   providedIn: 'root',
 })
 export class LandingPageService {
-  //implement interceptor
-  url: string = 'https://question-plus-7c126-default-rtdb.firebaseio.com/';
 
   constructor(private http: HttpClient) {}
 
   getPopularFlashCards(): Observable<{[key: string]: PopularFlashCards}> {
-    return this.http.get<{[key: string]: PopularFlashCards}>(`${this.url}popular-flashcards.json`);
+    return this.http.get<{[key: string]: PopularFlashCards}>(`/popular-flashcards.json`);
   }
 
   getPopularTextbooks(): Observable<{[key: string]:PopularTextBooks}> {
-    return this.http.get<{[key: string]: PopularTextBooks}>(`${this.url}popular-textbooks.json`);
+    return this.http.get<{[key: string]: PopularTextBooks}>(`/popular-textbooks.json`);
   }
 
   getPopularQuestions(): Observable<{[key: string]: PopularQuestion}> {
-    return this.http.get<{[key: string]: PopularQuestion}>(`${this.url}popular-questions.json`);
+    return this.http.get<{[key: string]: PopularQuestion}>(`/popular-questions.json`);
   }
 }

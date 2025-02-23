@@ -3,7 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
 import { User } from '../../../models/user.model';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flashcard-sets',
@@ -20,13 +20,13 @@ export class FlashcardSetsComponent implements OnInit {
 
   constructor(
     private libraryService: LibraryService,
-    private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-      this.getUserLibraryData();
-  }
+    this.getUserLibraryData();
+  };
 
   @HostListener('document:click')
   onDocumentClick() {

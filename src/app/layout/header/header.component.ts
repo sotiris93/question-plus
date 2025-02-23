@@ -1,8 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
+import { debounceTime, Subject, switchMap } from 'rxjs';
+import { PopupRecommendationService } from '../../services/popup-recommendation.service';
+import { AuthService } from '../../pages/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,52 +21,54 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
-  studyTools: SelectItemGroup[];
+export class HeaderComponent implements OnInit {
   selectedCity: string | undefined;
   isPopupOpen: boolean = false;
   isFilterPopupOpen: boolean = false;
+  @ViewChild('inputText') inputText: ElementRef | undefined;
+  private searchSubject = new Subject<string>();
+  recommendedWords: string[] = [];
+  authService = inject(AuthService);
 
-  constructor() {
-    this.studyTools = [
-      {
-        label: 'Germany',
-        value: 'de',
-        items: [
-          { label: 'Berlin', value: 'Berlin' },
-          { label: 'Frankfurt', value: 'Frankfurt' },
-          { label: 'Hamburg', value: 'Hamburg' },
-          { label: 'Munich', value: 'Munich' },
-        ],
-      },
-      {
-        label: 'USA',
-        value: 'us',
-        items: [
-          { label: 'Chicago', value: 'Chicago' },
-          { label: 'Los Angeles', value: 'Los Angeles' },
-          { label: 'New York', value: 'New York' },
-          { label: 'San Francisco', value: 'San Francisco' },
-        ],
-      },
-      {
-        label: 'Japan',
-        value: 'jp',
-        items: [
-          { label: 'Kyoto', value: 'Kyoto' },
-          { label: 'Osaka', value: 'Osaka' },
-          { label: 'Tokyo', value: 'Tokyo' },
-          { label: 'Yokohama', value: 'Yokohama' },
-        ],
-      },
-    ];
+  constructor(private popupRecommendationService: PopupRecommendationService) {}
+  ngOnInit(): void {
+    this.getRecommendation();
   }
-
 
   @HostListener('document:click')
   onDocumentClick() {
     console.log(this.isPopupOpen);
     this.isPopupOpen = false;
     this.isFilterPopupOpen = false;
+  }
+
+  onSearch(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.searchSubject.next(input.value);
+  }
+
+  getRecommendation() {
+    this.searchSubject
+      .pipe(
+        debounceTime(300),
+        switchMap((searchTerm) =>
+          this.popupRecommendationService.getWords(searchTerm)
+        )
+      )
+      .subscribe({
+        next: (response) => {
+          this.recommendedWords = response;
+          console.log(this.recommendedWords);
+        },
+        error: (error) => {
+          console.error('Error fetching recommended words:', error);
+        },
+      });
+  }
+
+  logout() {
+    this.authService.logout();
+    console.log('logout called');
+    
   }
 }

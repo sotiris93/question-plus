@@ -18,11 +18,19 @@
           height="15"
           width="15"
         />
-        <input type="text" placeholder="Search for flashcards"/>
+        <input #inputText type="text" (input)="onSearch($event)" placeholder="Search for flashcards"/>
       </div>
   
       @if (isFilterPopupOpen) {
-        <div class="filter-popup"></div>
+        <div class="filter-popup">
+          @for (word of recommendedWords; track $index) {
+            <div class="recommendation">
+              <img src="assets/svg/search.svg" alt="search for {{word}}" height="20" width="20">
+            <p>{{word}}</p>
+            </div>
+          }
+          
+        </div>
         }
     </div>
   
@@ -36,6 +44,7 @@
       <div class="upgrade">
         <p>Upgrade: free 7-day trial</p>
       </div>
+      <button (click)="logout()">Log out</button>
   
       <div class="circle-container" (click)="$event.stopPropagation()">
         <button class="circle" (click)="isPopupOpen = true">

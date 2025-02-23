@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,7 @@ export const routes: Routes = [
       },
       {
         path: 'my-library',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./pages/my-library/my-library.component').then(
             (m) => m.MyLibraryComponent

@@ -10,9 +10,6 @@ import { AuthService } from '../pages/auth/auth.service';
 })
 export class LibraryService {
 
-  url: string = 'https://question-plus-7c126-default-rtdb.firebaseio.com/';
-
-
   constructor(private http: HttpClient,
      private cookieService: CookieService,
     private authService: AuthService
@@ -23,7 +20,7 @@ export class LibraryService {
     if (!isAuthenticated) {
       throw new Error('Unauthorized user!');
     }
-    return this.http.get<User>(`${this.url}library/${this.authService.username}.json`, {
+    return this.http.get<User>(`/library/${this.authService.username}.json`, {
     });
   }
 }

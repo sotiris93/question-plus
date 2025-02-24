@@ -22,18 +22,21 @@
         @for (data of userLibraryData.created; track $index) {
             {{data}}
         }
-
-        @if (userLibraryData.created.length === 0 && selectedCategory === 'created') {
-          <p>You don't have any created flashcards yet</p>
+        @empty{
+            @if (selectedCategory === 'created') {
+                <p>You don't have any created flashcards yet</p>
+              }
+      
+              @else if (selectedCategory === 'recent') {
+                  <p>You don't have any recent flashcards yet</p>
+              }
+      
+              @else if (selectedCategory === 'studied') {
+                  <p>You don't have any studied flashcards yet</p>
+              }
         }
 
-        @else if (userLibraryData.created.length === 0 && selectedCategory === 'recent') {
-            <p>You don't have any recent flashcards yet</p>
-        }
-
-        @else if (userLibraryData.created.length === 0 && selectedCategory === 'studied') {
-            <p>You don't have any studied flashcards yet</p>
-        }
+      
       </div>
     
 </div>

@@ -16,16 +16,15 @@ export class AuthService {
 
   authState = this.authSubject.asObservable();
       
-  
-
   constructor(
     private http: HttpClient,
     private cookieService: CookieService
   ) {
     const authStatus = !!this.cookieService.get('token');
-    this.authSubject = new BehaviorSubject<boolean>(authStatus);
+    this.authSubject.next(authStatus);
   }
  get authStateValue() {
+  console.log('authStateValue', this.authSubject.value);
   return this.authSubject.value;
  }
 
@@ -42,7 +41,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           if (response.token) {
-            this.authSubject.next(true);
+            this.authSubject.next(true);  
             this.cookieService.set('token', response.token);
             this.cookieService.set('username', response.username);
           }
@@ -55,6 +54,7 @@ export class AuthService {
   }
 
   logout() {
+    this.authSubject.next(false);
     this.cookieService.deleteAll('/', window.location.hostname);
     localStorage.clear();
     window.location.reload();

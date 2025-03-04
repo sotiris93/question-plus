@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { visitorGuard } from './guards/visitor.guard';
+import { canDeactivateFormGuard } from './guards/can-deactivate-form.guard';
 
 export const routes: Routes = [
   {
@@ -24,10 +26,28 @@ export const routes: Routes = [
       },
       {
         path: 'auth',
+        canActivate: [visitorGuard],
         loadComponent: () =>
           import('./pages/auth/authentication.component').then(
             (m) => m.AuthenticationComponent
           ),
+          children: [
+            {
+              path: 'sign-up',
+              canDeactivate: [() => canDeactivateFormGuard],
+              loadComponent: () => import('./pages/auth/sign-up/sign-up.component').then(
+                (m) => m.SignUpComponent)
+            },
+            {
+              path: 'log-in', loadComponent: () => import('./pages/auth/log-in/log-in.component').then(
+                (m) => m.LogInComponent
+              )
+            },
+            {
+              path: '**',
+              redirectTo: 'sign-up'
+            }
+          ]
       },
       {
         path: 'my-library',

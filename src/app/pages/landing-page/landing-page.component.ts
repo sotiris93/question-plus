@@ -24,9 +24,10 @@ import { CarouselComponent } from './carousel/carousel.component';
   styleUrl: './landing-page.component.scss',
 })
 export class LandingPageComponent implements OnInit {
-  popularFlashCards: PopularFlashCards[] = [];
+  popularFlashCards:( PopularFlashCards | {loading: true})[] = Array(3).fill({loading: false});
   popularTextBooks: PopularTextBooks[] = [];
   popularQuestions: PopularQuestion[] = [];
+  isPopularFlashCardsLoaded: boolean = false;
 
   responsiveOptions = [
     {
@@ -42,12 +43,15 @@ export class LandingPageComponent implements OnInit {
     this.getPopularFlashCards();
     this.retrievePopularTextBooks();
     this.retrievePopularQuestions();
+    console.log('ispopularflashcardsloaded:', this.isPopularFlashCardsLoaded);
+    
   }
 
   getPopularFlashCards() {
     this.landingPageService.getPopularFlashCards().subscribe({
       next: (response: { [key: string]: PopularFlashCards }) => {
         this.popularFlashCards = Object.values(response);
+        this.isPopularFlashCardsLoaded = true;        
       },
       error: (error) => {
         console.error(

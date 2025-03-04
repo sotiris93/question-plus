@@ -16,7 +16,7 @@ export class LibraryService {
     ) { }
 
   getLibraryData(): Observable<User> {
-    const isAuthenticated = this.cookieService.get('isAuthenticated') === 'true';
+    const isAuthenticated = !!this.cookieService.get('token');
     if (!isAuthenticated) {
       throw new Error('Unauthorized user!');
     }

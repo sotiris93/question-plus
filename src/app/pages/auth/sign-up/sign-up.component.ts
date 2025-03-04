@@ -6,6 +6,8 @@ import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { AuthService } from '../auth.service';
 import { SignUpModel } from '../../../models/sign-up.model';
+import { CanComponentDeactivate } from '../../../guards/can-deactivate-form.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +21,7 @@ import { SignUpModel } from '../../../models/sign-up.model';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, CanComponentDeactivate {
   selectedMonth!: string;
   selectedDay!: number;
   selectedYear!: number;
@@ -36,6 +38,11 @@ export class SignUpComponent implements OnInit {
   formData: FormData = new FormData();
 
   constructor(private authService: AuthService) {}
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('canDeactivate called');
+    
+    return false;
+  }
 
   initializeFormdata() {
     this.months = [
@@ -85,10 +92,20 @@ export class SignUpComponent implements OnInit {
         },
         error: (error) => {
           console.error(error);
-        }
-
-      })
+        },
+      });
       console.log('Form data', form.value);
     }
+  }
+
+  get isFormDirty(): boolean {
+    return (
+      this.email !== '' ||
+      this.username !== '' ||
+      this.password !== '' ||
+      this.selectedDay !== this.days[0] ||
+      this.selectedMonth !== this.months[0] ||
+      this.selectedYear !== this.years[0]
+    );
   }
 }

@@ -36,7 +36,11 @@
   </main>
 
   <ng-template pTemplate="item" let-flashCard #popularFlashCardsTemplate>
+    
     <div class="flashcard">
+      <div class="skeleton-box"  *ngIf="!isPopularFlashCardsLoaded">
+      
+      </div>
       <p class="title">{{ flashCard.title }}</p>
       <p class="total-terms">{{ flashCard.totalTerms }} terms</p>
       <div class="user">
@@ -83,8 +87,7 @@
 
         <div class="totalTerms">
           <i class="pi pi-star-fill"></i>
-          <p >{{ textBook.totalSolutions }} solutions</p>
-
+          <p>{{ textBook.totalSolutions }} solutions</p>
         </div>
       </div>
     </div>
@@ -93,7 +96,7 @@
   <ng-template #popularQuestionsTemplate let-question>
     <div class="question">
       <p class="title">{{ question.title | titlecase }}</p>
-      <p class="description">{{question.description}}</p>
+      <p class="description">{{ question.description }}</p>
     </div>
   </ng-template>
 </div>

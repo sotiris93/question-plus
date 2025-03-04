@@ -13,11 +13,12 @@ import { ButtonModule } from 'primeng/button';
 import { debounceTime, Subject, switchMap } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
 import { AuthService } from '../../pages/auth/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, ButtonModule, SelectModule],
+  imports: [FormsModule, ButtonModule, SelectModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -29,9 +30,11 @@ export class HeaderComponent implements OnInit {
   private searchSubject = new Subject<string>();
   recommendedWords: string[] = [];
   authService = inject(AuthService);
+  isLoggedIn!: boolean;
 
   constructor(private popupRecommendationService: PopupRecommendationService) {}
   ngOnInit(): void {
+    this.getAuthStatus();
     this.getRecommendation();
   }
 
@@ -68,7 +71,14 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.isLoggedIn = false;
     console.log('logout called');
-    
+  }
+
+  getAuthStatus() {
+    this.authService.authState.subscribe((loginStatus) => {
+      this.isLoggedIn = loginStatus;
+      console.log('login status', this.isLoggedIn);
+    });
   }
 }

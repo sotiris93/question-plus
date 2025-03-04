@@ -4,13 +4,13 @@
     <p-tablist>
      
       <p-tab  *ngFor="let tab of tabs; let i = index" [value]="i"
-       [routerLink]="tab.path" [queryParams]="{ tabIndex: i}">{{tab.title}}</p-tab>
+       [routerLink]="tab.path">{{tab.title}}</p-tab>
       
     </p-tablist>
-    <p-tabpanels >
+    <p-tabpanels>
+    <!-- <p-tabpanels [selectedTabIndex]="selectedTabIndex"> -->
   
       <p-tabpanel *ngFor="let tab of tabs; let i = index" [value]="i">
-
           <router-outlet></router-outlet>
       </p-tabpanel>
   

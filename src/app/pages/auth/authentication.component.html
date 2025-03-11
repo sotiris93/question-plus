@@ -14,24 +14,13 @@
     <div class="sign-up-login-tabs">
       <div class="card">
         <p-tabs [value]="selectedTab">
-            <p-tablist>
-                <p-tab value="0" [routerLink]="['/auth/sign-up']" >Sign up</p-tab>
-                <p-tab value="1" [routerLink]="['/auth/log-in']" >Log in</p-tab>
-            </p-tablist>
-            <p-tabpanels>
-                <p-tabpanel value="0">
-
-                  <app-sign-up></app-sign-up>
-                </p-tabpanel>
-
-                <p-tabpanel value="1">
-                  
-                  <app-log-in></app-log-in>
-                  
-                </p-tabpanel>
-            </p-tabpanels>
+          <p-tablist>
+            <p-tab value="0" [routerLink]="['/auth/sign-up']">Sign up</p-tab>
+            <p-tab value="1" [routerLink]="['/auth/log-in']">Log in</p-tab>
+          </p-tablist>
         </p-tabs>
-    </div>
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </main>

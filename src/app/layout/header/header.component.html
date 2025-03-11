@@ -56,12 +56,13 @@
         <p>Upgrade: free 7-day trial</p>
       </div>
       @if (isLoggedIn) {
-      <button class="login" [routerLink]="['', 'auth', 'log-in']">
-        Log in
+        <button class="logout" (click)="logout()">Log out
+          
       </button>
       } @else {
-      <button class="logout" (click)="logout()">Log out</button>
-
+        <button class="login" [routerLink]="['', 'auth', 'log-in']">
+          Log in
+        </button>
       }
 
       <div class="circle-container" (click)="$event.stopPropagation()">
@@ -75,7 +76,26 @@
         </button>
 
         @if (isPopupOpen) {
-        <div class="popup"></div>
+        <div class="popup">
+          <button>
+            <i class="pi pi-trophy"></i>
+            Achievements
+          </button>
+          <button>
+            <i class="pi pi-cog"></i>
+            Settings
+          </button>
+          <button>
+            <i class="pi pi-moon"></i>
+            Dark Mode
+          </button>
+          <hr />
+          <button (click)="logout()">Log out</button>
+          <hr />
+          <button [routerLink]="['', 'privacy']" routerLinkActive="router-link-active" >Privacy policy</button>
+          <button>Help and feedback</button>
+          <button>Upgrade</button>
+        </div>
         }
       </div>
     </div>

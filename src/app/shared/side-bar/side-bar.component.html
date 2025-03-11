@@ -1,27 +1,33 @@
 <div class="sidebar-container">
 
-  <button>
+  <button [routerLink]="['']">
     <img src="assets/svg/home.svg" alt="home icon" height="20" width="20">
+    Home
   </button>
-  <button>
+
+  <button [routerLink]="['', 'my-library', 'flashcards']">
     <i class="pi pi-folder-open"></i>
+    My Library
   </button>
 
   <button>
     <i class="pi pi-bell"></i>
+    Notifications
   </button>
 
   <hr />
 
-  <button>
+  <button [routerLink]="['', 'create-flashcard']">
     <img
       src="assets/svg/flashcard.svg"
       alt="flashcards icon"
       height="20"
       width="20"
     />
+    Flashcards
   </button>
   <button>
     <i class="pi pi-book"></i>
+    Solutions
   </button>
 </div>

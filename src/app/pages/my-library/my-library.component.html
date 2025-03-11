@@ -1,21 +1,13 @@
 <div class="my-library-container">
 
-  <p-tabs [value]="selectedTabIndex">
+  <p-tabs [value]="0">
     <p-tablist>
      
-      <p-tab  *ngFor="let tab of tabs; let i = index" [value]="i"
+      <p-tab *ngFor="let tab of tabs; let i = index" [value]="i"
        [routerLink]="tab.path">{{tab.title}}</p-tab>
-      
+
     </p-tablist>
-    <p-tabpanels>
-    <!-- <p-tabpanels [selectedTabIndex]="selectedTabIndex"> -->
-  
-      <p-tabpanel *ngFor="let tab of tabs; let i = index" [value]="i">
-          <router-outlet></router-outlet>
-      </p-tabpanel>
-  
-    </p-tabpanels>
-    
   </p-tabs>
 
+  <router-outlet></router-outlet>
 </div>

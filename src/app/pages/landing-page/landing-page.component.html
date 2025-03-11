@@ -9,38 +9,23 @@
       <app-profile-progress></app-profile-progress>
     </div>
 
-    <div class="flashcards">
+    <ng-container *ngFor="let carousel of carousels; let i = index">
+      @if (!carousels[i].isLoaded) {
+        <div class="skeleton-box"></div>
+      }
       <app-carousel
-        [title]="'Popular flashcards'"
-        [items]="popularFlashCards"
-        [contentTemplate]="popularFlashCardsTemplate"
+        *ngIf="carousels[i].isLoaded"
+        [title]="carousels[i].title"
+        [items]="carousels[i].items"
+        [contentTemplate]="carousels[i].template"
       ></app-carousel>
-    </div>
-
-    <div class="textbooks">
-      <app-carousel
-        [title]="'Popular textbooks'"
-        [items]="popularTextBooks"
-        [contentTemplate]="popularTextbooksTemplate"
-      ></app-carousel>
-
-      <div class="questions">
-        <app-carousel
-          [title]="'Popular questions'"
-          [items]="popularQuestions"
-          [contentTemplate]="popularQuestionsTemplate"
-        >
-        </app-carousel>
-      </div>
-    </div>
+    </ng-container>
   </main>
 
   <ng-template pTemplate="item" let-flashCard #popularFlashCardsTemplate>
     
     <div class="flashcard">
-      <div class="skeleton-box"  *ngIf="!isPopularFlashCardsLoaded">
       
-      </div>
       <p class="title">{{ flashCard.title }}</p>
       <p class="total-terms">{{ flashCard.totalTerms }} terms</p>
       <div class="user">

@@ -21,6 +21,8 @@ export class AuthService {
     private cookieService: CookieService
   ) {
     const authStatus = !!this.cookieService.get('token');
+    console.log('token value:', this.cookieService.get('token'));
+    
     this.authSubject.next(authStatus);
   }
  get authStateValue() {
@@ -35,7 +37,9 @@ export class AuthService {
 
   login(data: { password: string; email: string }) {
     const apiUrl = `${this.url}/login`;
-
+    console.log('username', data.password);
+    console.log('password', data.email);
+    
     return this.http
       .post<{ token: string; username: string }>(apiUrl, data)
       .pipe(

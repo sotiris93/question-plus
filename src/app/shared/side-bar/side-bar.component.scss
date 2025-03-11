@@ -1,20 +1,28 @@
 .sidebar-container {
+  display: flex;
+  flex-direction: column;
+  
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    color: rgb(105, 115, 141);
+    font-weight: bold;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 17px;
 
-    button {
-        background: transparent;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-
-        &:hover {
-            background: rgb(238, 237, 237);
-        }
+    &:hover {
+      border-radius: 10px;
+      background: rgb(237, 239, 255);
     }
+  }
 
-    hr {
-        width: 100%;
-        border: 0.5px solid rgb(221, 219, 219);
-    }
+  hr {
+    width: 100%;
+    border: 0.5px solid rgb(221, 219, 219);
+  }
 }

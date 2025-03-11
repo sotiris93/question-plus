@@ -13,7 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { debounceTime, Subject, switchMap } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
 import { AuthService } from '../../pages/auth/auth.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   authService = inject(AuthService);
   isLoggedIn!: boolean;
 
-  constructor(private popupRecommendationService: PopupRecommendationService) {}
+  constructor(private popupRecommendationService: PopupRecommendationService, private router: Router) {}
   ngOnInit(): void {
     this.getAuthStatus();
     this.getRecommendation();
@@ -72,6 +72,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
+    this.router.navigate(['']);
     console.log('logout called');
   }
 

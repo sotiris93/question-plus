@@ -4,6 +4,7 @@ import { visitorGuard } from './guards/visitor.guard';
 import { canDeactivateFormGuard } from './guards/can-deactivate-form.guard';
 
 export const routes: Routes = [
+    // NORMAL PAGES
   {
     path: '',
     loadComponent: () =>
@@ -25,69 +26,100 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'auth',
-        canActivate: [visitorGuard],
+        path: 'privacy',
         loadComponent: () =>
-          import('./pages/auth/authentication.component').then(
-            (m) => m.AuthenticationComponent
-          ),
-          children: [
-            {
-              path: 'sign-up',
-              canDeactivate: [() => canDeactivateFormGuard],
-              loadComponent: () => import('./pages/auth/sign-up/sign-up.component').then(
-                (m) => m.SignUpComponent)
-            },
-            {
-              path: 'log-in', loadComponent: () => import('./pages/auth/log-in/log-in.component').then(
-                (m) => m.LogInComponent
-              )
-            },
-            {
-              path: '**',
-              redirectTo: 'sign-up'
-            }
-          ]
+          import('./privacy/privacy.component').then((m) => m.PrivacyComponent),
       },
+      // VISITOR PAGES
       {
-        path: 'my-library',
-        canActivate: [authGuard],
-        loadComponent: () =>
-          import('./pages/my-library/my-library.component').then(
-            (m) => m.MyLibraryComponent
-          ),
+        path: '',
+        canActivate: [visitorGuard],
         children: [
           {
-            path: 'flashcards',
+            path: 'auth',
             loadComponent: () =>
-              import(
-                './pages/my-library/flashcard-sets/flashcard-sets.component'
-              ).then((m) => m.FlashcardSetsComponent),
+              import('./pages/auth/authentication.component').then(
+                (m) => m.AuthenticationComponent
+              ),
+            children: [
+              {
+                path: 'sign-up',
+                canDeactivate: [() => canDeactivateFormGuard],
+                loadComponent: () =>
+                  import('./pages/auth/sign-up/sign-up.component').then(
+                    (m) => m.SignUpComponent
+                  ),
+              },
+              {
+                path: 'log-in',
+                loadComponent: () =>
+                  import('./pages/auth/log-in/log-in.component').then(
+                    (m) => m.LogInComponent
+                  ),
+              },
+              {
+                path: '**',
+                redirectTo: 'sign-up',
+              },
+            ],
           },
+        ],
+      },
+
+      // AUTHENTICATION PAGES
+      {
+        path: '',
+        canActivate: [authGuard],
+        children: [
           {
-            path: 'expert-solutions',
+            path: 'create-flashcard',
+            canActivate: [authGuard],
             loadComponent: () =>
-              import(
-                './pages/my-library/expert-solutions/expert-solutions.component'
-              ).then((m) => m.ExpertSolutionsComponent),
-          },
-          {
-            path: 'folders',
-            loadComponent: () =>
-              import('./pages/my-library/folders/folders.component').then(
-                (m) => m.FoldersComponent
+              import('./create-flashcard/create-flashcard.component').then(
+                (m) => m.CreateFlashcardComponent
               ),
           },
           {
-            path: 'classes',
+            path: 'my-library',
+            canActivate: [authGuard],
             loadComponent: () =>
-              import('./pages/my-library/classes/classes.component').then(
-                (m) => m.ClassesComponent
+              import('./pages/my-library/my-library.component').then(
+                (m) => m.MyLibraryComponent
               ),
-          },
-          {
-            path: '**',
-            redirectTo: 'flashcards'
+            children: [
+              {
+                path: 'flashcards',
+                loadComponent: () =>
+                  import(
+                    './pages/my-library/flashcard-sets/flashcard-sets.component'
+                  ).then((m) => m.FlashcardSetsComponent),
+              },
+              {
+                path: 'expert-solutions',
+                loadComponent: () =>
+                  import(
+                    './pages/my-library/expert-solutions/expert-solutions.component'
+                  ).then((m) => m.ExpertSolutionsComponent),
+              },
+              {
+                path: 'folders',
+                loadComponent: () =>
+                  import('./pages/my-library/folders/folders.component').then(
+                    (m) => m.FoldersComponent
+                  ),
+              },
+              {
+                path: 'classes',
+                loadComponent: () =>
+                  import('./pages/my-library/classes/classes.component').then(
+                    (m) => m.ClassesComponent
+                  ),
+              },
+              {
+                path: '**',
+                redirectTo: 'flashcards',
+              },
+            ],
           },
         ],
       },

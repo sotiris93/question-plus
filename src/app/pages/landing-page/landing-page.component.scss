@@ -2,7 +2,7 @@
   display: flex;
   padding-top: 40px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #F6F7FB;
+  background: #f6f7fb;
   min-height: 100vh;
   // padding-left: 380px;
   // padding-right: 380px;
@@ -10,7 +10,17 @@
   }
 
   main {
+    width: 100%;
     padding: 40px 200px;
+    .loading-items-container {
+      display: flex;
+    }
+
+    .skeleton-box {
+      height: 132px;
+      width: 33%;
+      margin: 1rem;
+    }
   }
 
   .flashcard,
@@ -27,6 +37,8 @@
     .title {
       font-size: 18px;
       font-weight: 600;
+      min-height: 72px;
+      margin: 0;
     }
 
     .total-terms {
@@ -35,6 +47,7 @@
       border-radius: 20px;
       font-weight: 600;
       padding: 5px;
+      margin: 0;
       width: fit-content;
     }
 
@@ -42,7 +55,6 @@
       display: flex;
       align-items: center;
       column-gap: 0.5rem;
-      padding-top: 0.5rem;
 
       .username {
         font-size: 18px;
@@ -136,8 +148,14 @@
     font-size: 14px;
 
     .title {
-      color: #5A6581;
+      color: #5a6581;
       font-weight: 600;
     }
+  }
+}
+
+::ng-deep {
+  .p-carousel-content-container {
+    width: 100%;
   }
 }

@@ -19,7 +19,7 @@
 
     <div class="user-data">
 
-        @for (data of userLibraryData.created; track $index) {
+        @for (data of userLibraryData?.created; track $index) {
             {{data}}
         }
         @empty{

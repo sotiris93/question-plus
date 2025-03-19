@@ -55,7 +55,7 @@
       <div class="upgrade">
         <p>Upgrade: free 7-day trial</p>
       </div>
-      @if (isLoggedIn) {
+      @if (isLoggedInSignal()) {
         <button class="logout" (click)="logout()">Log out
           
       </button>

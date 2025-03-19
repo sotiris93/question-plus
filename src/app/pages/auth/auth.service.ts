@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { SignUpModel } from '../../models/sign-up.model';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, catchError, of, tap } from 'rxjs';
@@ -9,12 +9,8 @@ import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 })
 export class AuthService {
   url: string = 'http://localhost:3000';
-  private authSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
-
-
-  authState = this.authSubject.asObservable();
+  
+  authState = signal(false);
       
   constructor(
     private http: HttpClient,
@@ -22,17 +18,32 @@ export class AuthService {
   ) {
     const authStatus = !!this.cookieService.get('token');
     console.log('token value:', this.cookieService.get('token'));
-    
-    this.authSubject.next(authStatus);
+    this.authState.set(authStatus);
   }
  get authStateValue() {
-  console.log('authStateValue', this.authSubject.value);
-  return this.authSubject.value;
+  return this.authState();
  }
 
   signup(data: SignUpModel) {
+    console.log('Sending signup data:', data);
     const apiUrl = `${this.url}/signup`;
-    return this.http.post(apiUrl, data);
+    return this.http
+    .post<{token: string; username: string}>(apiUrl, data)
+    .pipe(
+      tap((response) => {
+        if (response.token) {
+          console.log('response: ', response);
+          
+          this.authState.set(true);
+          this.cookieService.set('token', response.token, {path: '/'});
+          this.cookieService.set('username', response.token, {path: '/'});
+        }
+      }
+    ),
+    catchError((error) => {
+      console.error('Signup failed:', error);
+      return of({ error: 'Login failed'});
+    }))
   }
 
   login(data: { password: string; email: string }) {
@@ -45,9 +56,9 @@ export class AuthService {
       .pipe(
         tap((response) => {
           if (response.token) {
-            this.authSubject.next(true);  
-            this.cookieService.set('token', response.token);
-            this.cookieService.set('username', response.username);
+            this.authState.set(true);
+            this.cookieService.set('token', response.token, {path: '/'});
+            this.cookieService.set('username', response.username, {path: '/'});
           }
         }),
         catchError((error)=> {
@@ -58,7 +69,7 @@ export class AuthService {
   }
 
   logout() {
-    this.authSubject.next(false);
+    this.authState.set(false);
     this.cookieService.deleteAll('/', window.location.hostname);
     localStorage.clear();
     window.location.reload();

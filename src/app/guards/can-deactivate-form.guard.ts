@@ -15,10 +15,10 @@ export const canDeactivateFormGuard: CanDeactivateFn<CanComponentDeactivate> = (
   console.log('canDeactivate called from guard');
   if (!component) {
     console.log('component is not loaded');
-    
   }
   if (component && !component.canDeactivate()) {
-    return confirm('You have unsaved changes. Do you really want to leave?');
+    const confirmExit = confirm('You have unsaved changes. Do you really want to leave?');
+    return confirmExit; 
   }
   return true;
 };

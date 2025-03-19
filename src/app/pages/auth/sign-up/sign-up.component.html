@@ -144,6 +144,7 @@
         />
         I want to receive news, updates and emails from Question plus
       </label>
+    
 
       <label class="policy">
         <input
@@ -152,7 +153,15 @@
           name="termsofService"
           value="terms"
           [(ngModel)]="isAcceptTerms"
+          #termsField = "ngModel"
+          required
         />
+        <div class="error">
+          @if (termsField.untouched) {
+            <p>You must accept the Terms of Service</p>
+          }
+        </div>
+       
         <pre>I accept Questions Plus'<a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service</a
         ></pre>
       </label>

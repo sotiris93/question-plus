@@ -4,6 +4,7 @@ import {
   HostListener,
   inject,
   OnInit,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit {
   recommendedWords: string[] = [];
   authService = inject(AuthService);
   isLoggedIn!: boolean;
+  isLoggedInSignal = signal(false);
 
   constructor(private popupRecommendationService: PopupRecommendationService, private router: Router) {}
   ngOnInit(): void {
@@ -77,9 +79,11 @@ export class HeaderComponent implements OnInit {
   }
 
   getAuthStatus() {
-    this.authService.authState.subscribe((loginStatus) => {
-      this.isLoggedIn = loginStatus;
-      console.log('login status', this.isLoggedIn);
-    });
+    // this.authService.authState.subscribe((loginStatus) => {
+    //   this.isLoggedIn = loginStatus;
+    //   console.log('login status', this.isLoggedIn);
+    // });
+    this.isLoggedIn = this.authService.authState();
+    this.isLoggedInSignal.set(this.authService.authState());
   }
 }

@@ -84,14 +84,16 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
         password: this.password,
         dateOfBirth: `${this.selectedYear} ${this.selectedMonth} ${this.selectedDay}`,
       };
-      this.isAuthenticated = true;
-      this.authService.signup(data).subscribe({
+      this.isAuthenticated = false;
+      this.authService.signup(data)
+      .subscribe({
         next: (response) => {
           console.log(response);
           this.isAuthenticated = true;
         },
         error: (error) => {
           console.error(error);
+          this.isAuthenticated = false;
         },
       });
       console.log('Form data', form.value);

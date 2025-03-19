@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.scss',
 })
-export class AuthenticationComponent implements OnInit {
+export class AuthenticationComponent implements OnInit, CanComponentDeactivate {
   selectedTab: string = '0';
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -20,12 +20,10 @@ export class AuthenticationComponent implements OnInit {
     this.selectedTab = this.router.url.includes('auth/log-in') ? '1' : '0';
     console.log('router:', this.router.url);
     console.log('selected tab: ', this.selectedTab);
-    
   }
 
-  // canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-  //   console.log('canDeactivate called');
-    
-  //   return false;
-  // }
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('canDeactivate called');
+    return false;
+  }
 }

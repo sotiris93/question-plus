@@ -14,7 +14,7 @@ export class FlashcardSetsComponent implements OnInit {
   categories: string[] = ['created', 'recent', 'studied'];
   selectedCategory = this.categories[1];
   isDropdownOpen: boolean = false;
-  userLibraryData: User = { created: [], recent: [], studied: [] }; // MOCK OBJECT;
+  userLibraryData: User | null = { created: [], recent: [], studied: [] }; // MOCK OBJECT;
   isAuthenticated: boolean = false;
 
   constructor(
@@ -25,7 +25,7 @@ export class FlashcardSetsComponent implements OnInit {
 
   ngOnInit() {
     this.getUserLibraryData();
-  };
+  }
 
   @HostListener('document:click')
   onDocumentClick() {
@@ -35,8 +35,10 @@ export class FlashcardSetsComponent implements OnInit {
   getUserLibraryData() {
     this.libraryService.getLibraryData().subscribe({
       next: (data) => {
-        this.userLibraryData = data;
-        console.log('User data: ', data);
+        if (data) {
+          this.userLibraryData = data;
+          console.log('User data: ', data);
+        }
       },
       error: (err) => {
         console.error('Error fetching library data:', err);

@@ -44,7 +44,7 @@ export const routes: Routes = [
             children: [
               {
                 path: 'sign-up',
-                canDeactivate: [() => canDeactivateFormGuard],
+                canDeactivate: [canDeactivateFormGuard],
                 loadComponent: () =>
                   import('./pages/auth/sign-up/sign-up.component').then(
                     (m) => m.SignUpComponent

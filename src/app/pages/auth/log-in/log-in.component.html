@@ -77,15 +77,22 @@
       <pre>
         By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></pre>
 
-        <button class="submit" type="submit">Log in</button>
+        <div class="submit-button">
+          <button class="submit" type="submit" [disabled]="isRequestSent"
+          [ngStyle]="{'opacity': isRequestSent ? '0.1' : '1',
+           'cursor': isRequestSent ? 'not-allowed' : 'pointer'}">Log in</button>
+           
+            @if (isRequestSent) {
+              <div class="spinner">
+                <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+              </div>
+            }
+        </div>
+       
         <button class="sign-up" type="text">New to Question Plus? Create your account</button>
         
     </form>
 
-    @if (isRequestSent) {
-      <div class="spinner">
-        <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
-      </div>
-    }
+   
   </div>
 </main>

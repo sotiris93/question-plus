@@ -7,7 +7,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AuthService } from '../auth.service';
 import { SignUpModel } from '../../../models/sign-up.model';
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-form.guard';
-import { Observable } from 'rxjs';
+import { delay, finalize, Observable } from 'rxjs';
+import { ProgressSpinner } from 'primeng/progressspinner';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +19,8 @@ import { Observable } from 'rxjs';
     CommonModule,
     TooltipModule,
     RouterModule,
-  ],
+    ProgressSpinner
+],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
@@ -31,7 +34,7 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
   isAuthenticated: boolean = false;
   isReceiveUpdates: boolean = false;
   isAcceptTerms: boolean = false;
-
+  isRequestSent: boolean = false;
   months: string[] = [];
   days: number[] = [];
   years: number[] = [];
@@ -77,6 +80,7 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
   }
 
   signup(form: any) {
+    this.isRequestSent = true;
     if (form.valid) {
       const data: SignUpModel = {
         email: this.email,
@@ -85,7 +89,11 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
         dateOfBirth: `${this.selectedYear} ${this.selectedMonth} ${this.selectedDay}`,
       };
       this.isAuthenticated = false;
-      this.authService.signup(data)
+      this.authService.signup(data).pipe(
+        finalize(()=> {
+          this.isRequestSent = false;
+        })
+      )
       .subscribe({
         next: (response) => {
           console.log(response);

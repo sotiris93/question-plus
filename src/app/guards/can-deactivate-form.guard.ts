@@ -1,6 +1,8 @@
 import { CanDeactivateFn } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { SignUpComponent } from '../pages/auth/sign-up/sign-up.component';
+import { inject } from '@angular/core';
+import { ModalService } from '../services/modal.service';
 
 export interface CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
@@ -12,13 +14,14 @@ export const canDeactivateFormGuard: CanDeactivateFn<CanComponentDeactivate> = (
   currentState,
   nextState
 ) => {
+  const modalService = inject(ModalService);
   console.log('canDeactivate called from guard');
   if (!component) {
     console.log('component is not loaded');
   }
   if (component && !component.canDeactivate()) {
-    const confirmExit = confirm('You have unsaved changes. Do you really want to leave?');
-    return confirmExit; 
+    return modalService.openModal();
   }
+
   return true;
 };

@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --bg-color: #f6f7fb;
+  --text-color: black;
+  color-scheme: light !important;
+}
+
 body {
   overflow-x: hidden;
+  margin: 0;
 }
 
 .skeleton-box {
@@ -15,7 +22,7 @@ body {
   &::after {
     content: "";
     position: absolute;
-    inset:0; // top, right, bottom, left = 0
+    inset: 0; // top, right, bottom, left = 0
     transform: translateX(-100%);
     background-image: linear-gradient(
       90deg,

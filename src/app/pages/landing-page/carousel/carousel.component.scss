@@ -1,10 +1,13 @@
 .carousel-container {
+
+  @media screen and (max-width: 830px) {
+    max-width: 550px;
+  }
   .heading {
     color: #586380;
     font-size: 19px;
   }
 
- 
 }
 
 

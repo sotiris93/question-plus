@@ -20,7 +20,7 @@
         align-items: center;
         justify-content: center;
         column-gap: 0.5rem;
-        color:  #586380;
+        color: #586380;
         font-size: 16px;
         font-weight: 600;
         cursor: pointer;
@@ -33,7 +33,6 @@
   }
 
   .email-data {
-    
     width: 100%;
     .or-email {
       position: relative;
@@ -120,15 +119,28 @@
         font-weight: 600;
       }
 
-      .submit {
-        background: #4255ff;
-        border-radius: 10px;
-        color: white;
-        height: 65px;
-        border: none;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
+      .sign-up {
+        position: relative;
+        .submit {
+          width: 100%;
+          background: #4255ff;
+          border-radius: 10px;
+          color: white;
+          height: 65px;
+          border: none;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .spinner {
+          display: flex;
+          justify-content: center;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
 
       .login {

@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="middle-section">
+    <div class="middle-section" tabindex="0">
       <div
         class="search"
         (click)="isFilterPopupOpen = true; $event.stopPropagation()"
@@ -29,7 +29,7 @@
       </div>
 
       @if (isFilterPopupOpen) {
-      <div class="filter-popup">
+      <div class="filter-popup" [style.display]="recommendedWords.length > 0 ? 'block' : 'none'">
         @for (word of recommendedWords; track $index) {
         <div class="recommendation">
           <img

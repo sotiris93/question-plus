@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TabsModule } from 'primeng/tabs';
-import { LogInComponent } from './log-in/log-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CanComponentDeactivate } from '../../guards/can-deactivate-form.guard';
 import { Observable } from 'rxjs';
+import { LeavePageModalComponent } from "../../shared/leave-page-modal/leave-page-modal.component";
 
 @Component({
   selector: 'app-authentication',

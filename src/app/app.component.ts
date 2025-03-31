@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { DropdownModule } from 'primeng/dropdown';
+import { LeavePageModalComponent } from './shared/leave-page-modal/leave-page-modal.component';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,23 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     RouterOutlet,
     DropdownModule,
+    LeavePageModalComponent,
   ],
-  providers: [
-  ],
+  providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'question-plus';
+  constructor() {
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      document.documentElement.classList.add(theme);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      if (prefersDark.matches) {
+        document.documentElement.classList.add('dark-theme');
+      }
+      localStorage.setItem('theme', prefersDark.matches ? 'dark' : 'light');
+    }
+  }
 }

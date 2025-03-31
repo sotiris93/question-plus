@@ -4,10 +4,11 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { delay, finalize } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-log-in',
-  imports: [FormsModule, RouterModule, ProgressSpinner],
+  imports: [FormsModule, RouterModule, ProgressSpinner, CommonModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss',
 })

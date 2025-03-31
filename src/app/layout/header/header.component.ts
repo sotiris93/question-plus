@@ -4,6 +4,7 @@ import {
   HostListener,
   inject,
   OnInit,
+  Renderer2,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -11,7 +12,7 @@ import { SelectItemGroup } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
-import { debounceTime, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, debounceTime, Subject, switchMap } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
 import { AuthService } from '../../pages/auth/auth.service';
 import { RouterModule, Router } from '@angular/router';
@@ -28,15 +29,22 @@ export class HeaderComponent implements OnInit {
   isPopupOpen: boolean = false;
   isFilterPopupOpen: boolean = false;
   @ViewChild('inputText') inputText: ElementRef | undefined;
-  private searchSubject = new Subject<string>();
+  @ViewChild('middleSection') middleSection!: ElementRef;
+  private searchSubject = new BehaviorSubject<string>("");
   recommendedWords: string[] = [];
   authService = inject(AuthService);
   isLoggedIn!: boolean;
   isLoggedInSignal = signal(false);
 
-  constructor(private popupRecommendationService: PopupRecommendationService, private router: Router) {}
+  constructor(
+    private popupRecommendationService: PopupRecommendationService,
+    private router: Router,
+    private renderer2: Renderer2
+  ) {}
+
   ngOnInit(): void {
     this.getAuthStatus();
+    console.log('auth status: ', this.isLoggedIn);
     this.getRecommendation();
   }
 

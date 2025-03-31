@@ -3,22 +3,14 @@
     <!-- move it to the layout component -->
     <app-side-bar></app-side-bar>
   </div>
-
   <main>
+    
+
     <div class="profile-progress">
       <app-profile-progress></app-profile-progress>
     </div>
 
     <ng-container *ngFor="let carousel of carousels; let i = index">
-      <!-- @if (!carousels[i].isLoaded) {
-        <div class="skeleton-box"></div>
-      }
-      <app-carousel
-        *ngIf="carousels[i].isLoaded"
-        [title]="carousels[i].title"
-        [items]="carousels[i].items"
-        [contentTemplate]="carousels[i].template"
-      ></app-carousel> -->
 
       @defer (when carousels[i].isLoaded) {
         <app-carousel
@@ -28,7 +20,9 @@
         [contentTemplate]="carousels[i].template"
       ></app-carousel>
       } @placeholder {
+        <p style="height: 30px;visibility: hidden;">sff</p>
         <div class="loading-items-container">
+          
           <div class="skeleton-box"></div>
           <div class="skeleton-box"></div>
           <div class="skeleton-box"></div>

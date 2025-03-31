@@ -1,0 +1,20 @@
+@if (isVisible) {
+<div class="modal-container">
+  <dialog aria-labelledby="modal-leave-page" class="leave-page-modal">
+    <i class="pi pi-times" (click)="stay()"></i>
+    <div class="content">
+      <h3>You have unsaved changes. Do you really want to leave?</h3>
+      <p>
+        It looks like you are in the middle of writing something and you have
+        not saved all of your content.
+      </p>
+      <p>Save before you go!</p>
+      <div class="actions-container">
+        <button (click)="isVisible = false">Stay</button>
+        <button (click)="leave()">Leave</button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+}

@@ -1,4 +1,5 @@
 <div class="sign-up-container">
+  
   <div class="social-media">
     <!-- create google account -->
     <a
@@ -166,9 +167,18 @@
         ></pre>
       </label>
 
-      <button class="submit" type="submit" [disabled]="form.invalid">
-        Sign up
-      </button>
+      <div class="sign-up">
+        <button class="submit" type="submit" [disabled]="form.invalid">
+          Sign up
+        </button>
+        
+        @if (isRequestSent) {
+          <div class="spinner">
+            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+          </div>
+        }
+      </div>
+     
       <button class="login">Already have an account? Log in</button>
     </form>
   </div>

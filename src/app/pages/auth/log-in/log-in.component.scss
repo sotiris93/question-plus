@@ -4,7 +4,6 @@ body {
 }
 
 .login-container {
-  min-width: max-content;
   position: relative;
 
   .social-media {
@@ -88,7 +87,7 @@ body {
     .submit-button {
       position: relative;
       height: 70px;
-      
+
       .submit {
         width: 100%;
         background: #4255ff;
@@ -122,4 +121,5 @@ body {
       cursor: pointer;
     }
   }
+
 }

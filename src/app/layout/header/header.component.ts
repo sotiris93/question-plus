@@ -4,7 +4,6 @@ import {
   HostListener,
   inject,
   OnInit,
-  Renderer2,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -12,7 +11,7 @@ import { SelectItemGroup } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
-import { BehaviorSubject, debounceTime, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, debounceTime, skip, switchMap } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
 import { AuthService } from '../../pages/auth/auth.service';
 import { RouterModule, Router } from '@angular/router';
@@ -33,18 +32,15 @@ export class HeaderComponent implements OnInit {
   private searchSubject = new BehaviorSubject<string>("");
   recommendedWords: string[] = [];
   authService = inject(AuthService);
-  isLoggedIn!: boolean;
   isLoggedInSignal = signal(false);
 
   constructor(
     private popupRecommendationService: PopupRecommendationService,
     private router: Router,
-    private renderer2: Renderer2
   ) {}
 
   ngOnInit(): void {
     this.getAuthStatus();
-    console.log('auth status: ', this.isLoggedIn);
     this.getRecommendation();
   }
 
@@ -63,9 +59,12 @@ export class HeaderComponent implements OnInit {
   getRecommendation() {
     this.searchSubject
       .pipe(
+        skip(1),
         debounceTime(300),
-        switchMap((searchTerm) =>
-          this.popupRecommendationService.getWords(searchTerm)
+        switchMap((searchTerm) => {
+          console.log('search input changed', searchTerm);
+          return this.popupRecommendationService.getWords(searchTerm)
+        }
         )
       )
       .subscribe({
@@ -81,17 +80,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.isLoggedIn = false;
-    this.router.navigate(['']);
-    console.log('logout called');
   }
 
   getAuthStatus() {
-    // this.authService.authState.subscribe((loginStatus) => {
-    //   this.isLoggedIn = loginStatus;
-    //   console.log('login status', this.isLoggedIn);
-    // });
-    this.isLoggedIn = this.authService.authState();
-    this.isLoggedInSignal.set(this.authService.authState());
+    this.isLoggedInSignal = this.authService.authState;
   }
 }

@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ProgressSpinner } from 'primeng/progressspinner';
-import { delay, finalize } from 'rxjs';
+import { delay, finalize, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -37,6 +37,7 @@ export class LogInComponent implements OnInit {
       )
       .subscribe({
         next: () => {
+          console.log('Login successful');
           this.router.navigate(['/my-library'], { replaceUrl: true });
         },
         error: (error) => {

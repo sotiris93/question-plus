@@ -1,5 +1,5 @@
 .sign-up-container {
-  min-width: max-content;
+  width: 100%;
   font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   .social-media {
@@ -9,9 +9,10 @@
 
     a {
       text-decoration: none;
-      width: 100%;
+
       .google,
       .facebook {
+        height: 60px;
         background: transparent;
         border: 2px solid #d9dde8;
         border-radius: 10px;
@@ -29,6 +30,18 @@
 
     .google {
       width: 100%;
+      max-width: 200px;
+      p {
+        font-size: 13px;
+
+        @media screen and (min-width:40px) {
+          display: none;
+        }
+
+        @media screen and (min-width:240px) {
+          display: flex;
+        }
+      }
     }
   }
 

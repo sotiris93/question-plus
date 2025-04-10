@@ -69,7 +69,7 @@ export class AuthService {
   }
 
   logout() {
-    this.authState.set(false);
+    console.log('logout called');
     this.cookieService.deleteAll('/', window.location.hostname);
     localStorage.clear();
     window.location.reload();

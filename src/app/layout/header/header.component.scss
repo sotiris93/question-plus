@@ -11,6 +11,15 @@
       "middle middle";
     height: 40px;
   }
+
+  @media screen and (max-width: 350px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "left"
+    "right"
+    "middle"
+    ;
+  }
   .left-section {
     grid-area: left;
     display: flex;
@@ -115,6 +124,10 @@
       width: 370px;
     }
 
+    @media screen and (max-width: 460px) {
+      width: 100%;
+    }
+
     .create {
       background: blue;
       height: 100%;
@@ -137,10 +150,24 @@
       height: 100%;
       display: flex;
       align-items: center;
-      p {
+
+      p:first-child {
         margin: 0;
       }
-    }
+      p:last-child {
+        display: none;
+      }
+
+      @media screen and (max-width: 460px) {
+        p:first-child {
+          display: none;
+        }
+        p:last-child {
+          margin: 0;
+          display: flex;
+      }
+      }
+  }
 
     .logout {
       cursor: pointer;

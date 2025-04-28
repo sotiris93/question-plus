@@ -3,12 +3,15 @@
 :root {
   --bg-color: #f6f7fb;
   --text-color: black;
+  --primary-color: #007bff;
   color-scheme: light !important;
 }
 
 body {
   overflow-x: hidden;
   margin: 0;
+  font-family: 'hurme_no2-wwbfont', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
 }
 
 .skeleton-box {

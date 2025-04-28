@@ -5,6 +5,17 @@ body {
 
 .login-container {
   position: relative;
+  width: 100%;
+
+  .form-overlay {
+    position: absolute;
+    background: rgb(212, 210, 210);
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    border-radius: 10px;
+  }
 
   .social-media {
     display: flex;
@@ -78,11 +89,15 @@ body {
       }
     }
 
-    .terms-of-service {
-      text-decoration: none;
-      color: #586380;
-      font-weight: 600;
+    pre {
+      text-wrap: auto;
+      .terms-of-service {
+        text-decoration: none;
+        color: #586380;
+        font-weight: 600;
+      }
     }
+   
 
     .submit-button {
       position: relative;
@@ -98,6 +113,7 @@ body {
         font-size: 18px;
         cursor: pointer;
       }
+    
 
       .spinner {
         position: absolute;

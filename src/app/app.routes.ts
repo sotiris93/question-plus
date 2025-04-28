@@ -4,7 +4,7 @@ import { visitorGuard } from './guards/visitor.guard';
 import { canDeactivateFormGuard } from './guards/can-deactivate-form.guard';
 
 export const routes: Routes = [
-    // NORMAL PAGES
+  // NORMAL PAGES
   {
     path: '',
     loadComponent: () =>
@@ -17,7 +17,14 @@ export const routes: Routes = [
           import('./pages/landing-page/landing-page.component').then(
             (m) => m.LandingPageComponent
           ),
-      },
+        },
+          {
+            path: 'flashcard',
+            loadComponent: () =>
+              import('./pages/landing-page/flashcard/flashcard.component').then(
+                (m) => m.FlashcardComponent
+              ),
+          },
       {
         path: 'terms-of-service',
         loadComponent: () =>

@@ -1,8 +1,12 @@
+@use "responsive";
+
 .header-container {
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: "left middle right";
-  height: 40px;
+  height: 64px;
+  padding: 0 1rem;
 
   @media screen and (max-width: 660px) {
     grid-template-columns: 1fr;
@@ -15,10 +19,9 @@
   @media screen and (max-width: 350px) {
     grid-template-columns: 1fr;
     grid-template-areas:
-    "left"
-    "right"
-    "middle"
-    ;
+      "left"
+      "right"
+      "middle";
   }
   .left-section {
     grid-area: left;
@@ -36,37 +39,73 @@
       background: transparent;
       padding: 10px;
       cursor: pointer;
+
+      .pi-bars {
+        font-size: 22px;
+        color: rgb(88, 99, 128);
+      }
     }
     .logo {
+      display: flex;
+      align-items: center;
       h1 {
-        color: blue;
+        font-size: 40px;
+        color: var(--primary-color);
         margin: 0;
         cursor: pointer;
+      }
+    }
+
+    .study-tools-popup {
+      display: flex;
+      align-items: center;
+
+      .button-ui {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        white-space: nowrap;
+        img {
+          transform: rotateZ(90deg);
+        }
+      }
+
+      .popup-ui {
       }
     }
   }
 
   .middle-section {
     grid-area: middle;
-    width: 100%;
-    min-width: 200px;
-    height: 100%;
+    width: auto;
+    min-width: 250px;
+    height: 40px;
     position: relative;
     z-index: 100;
+    background: rgb(246, 247, 251);
+    border-radius: 10px;
+    border: 2px solid transparent;
 
     &:focus-within {
-      border: 2px solid blue;
-      border-radius: 10px;
+      background: white;
+      border: 2px solid var(--primary-color);
     }
 
     @media screen and (max-width: 1110px) {
       height: 40px;
       width: 60%;
     }
+
+    @include responsive.min-width("xxs") {
+      width: 100%;
+    }
+
+    @include responsive.min-width("sm") {
+    }
     .search {
-      background: #edeff4;
-      color: #939bb4;
-      padding: 0.5rem;
+      position: relative;
+      color: rgb(147, 155, 180);
+      padding: 0.7rem;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -74,6 +113,34 @@
       max-width: 600px;
       width: 100%;
       height: 100%;
+      font-size: 20px;
+
+      img {
+        margin-left: 0.2rem;
+      }
+
+      input {
+        color: rgb(147, 155, 180);
+        font-weight: bold;
+        font-size: 16px;
+
+        &::placeholder {
+          font-size: 15px;
+          color: rgb(147, 155, 180);
+        }
+      }
+    }
+    .search-notification {
+      position: absolute;
+      background: aqua;
+      transform: translate(-100%);
+      font-size: 18px;
+      border-radius: 20px;
+
+      p {
+        margin: 0;
+        padding: 5px;
+      }
     }
 
     .filter-popup {
@@ -117,7 +184,8 @@
     justify-content: end;
     align-items: center;
     width: 100%;
-    column-gap: 1rem;
+    column-gap: 1.5rem;
+    z-index: 1;
 
     @media screen and (max-width: 1110px) {
       // width: 80%;
@@ -126,12 +194,14 @@
 
     @media screen and (max-width: 460px) {
       width: 100%;
+      display: flex;
+      justify-content: flex-start;
     }
 
-    .create {
-      background: blue;
-      height: 100%;
-      border-radius: 10px;
+    .create-icon {
+      background: var(--primary-color);
+      height: 40px;
+      border-radius: 50%;
       width: 40px;
       button {
         background: transparent;
@@ -140,16 +210,40 @@
         height: 100%;
         width: 100%;
         padding: 0.5rem;
+        cursor: pointer;
+
+        .pi-plus {
+          font-size: 19px;
+        }
+      }
+    }
+
+    .create-section {
+      button {
+        display: flex;
+        align-items: center;
+        column-gap: 0.7rem;
+        border: none;
+        color: var(--primary-color);
+        font-size: 15px;
+        background: transparent;
+        cursor: pointer;
+
+        .pi-plus {
+          font-size: 14px;
+        }
       }
     }
 
     .upgrade {
       background: rgb(247, 207, 5);
-      border-radius: 10px;
-      padding: 0.5rem;
+      border-radius: 20px;
+      padding: 0.7rem 1rem;
       height: 100%;
       display: flex;
       align-items: center;
+      cursor: pointer;
+      font-size: 16px;
 
       p:first-child {
         margin: 0;
@@ -165,58 +259,111 @@
         p:last-child {
           margin: 0;
           display: flex;
+        }
       }
-      }
-  }
 
-    .logout {
-      cursor: pointer;
-
-      &:disabled {
-        cursor: not-allowed;
+      @media screen and (min-width: 1300px) {
+        p:first-child {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-width: 150px;
+          white-space: nowrap;
+        }
       }
     }
-    .circle-container {
-      position: relative;
-      width: fit-content;
-      .circle {
+
+    .login {
+      height: 40px;
+      width: 75px;
+      border-radius: 20px;
+      background: var(--primary-color);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    // .logout {
+    //   cursor: pointer;
+
+    //   &:disabled {
+    //     cursor: not-allowed;
+    //   }
+  }
+  .circle-container {
+    position: relative;
+    width: fit-content;
+    .circle {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+
+      img {
         height: 40px;
         width: 40px;
         border-radius: 50%;
-        border: none;
-        background: transparent;
-        cursor: pointer;
+      }
+    }
+
+    .popup {
+      position: absolute;
+      height: 300px;
+      width: 200px;
+      right: 0;
+      top: calc(100% + 1rem);
+      background: white;
+      z-index: 1;
+      border-radius: 10px;
+
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         img {
+          height: 40px;
+          width: 40px;
           border-radius: 50%;
+        }
+
+        .user-info {
+          display: flex;
+          flex-direction: column;
+          .username,
+          .email {
+            p {
+              margin: 0.2rem 0.5rem;
+            }
+          }
+
+          .username {
+            font-weight: bold;
+          }
+          .email {
+            font-weight: bold;
+            color: rgb(121, 118, 118);
+          }
         }
       }
 
-      .popup {
-        position: absolute;
-        height: 300px;
-        width: 200px;
-        right: 0;
-        top: calc(100% + 1rem);
-        background: white;
-        z-index: 1;
-        border-radius: 10px;
+      button {
+        display: flex;
+        border: none;
+        background: transparent;
+        padding: 0.5rem 1rem;
+        column-gap: 1rem;
+        font-size: 15px;
+        font-weight: bold;
+        color: rgb(88, 99, 128);
+        cursor: pointer;
+      }
 
-        button {
-          display: flex;
-          border: none;
-          background: transparent;
-          padding: 0.5rem 1rem;
-          column-gap: 1rem;
-          font-size: 15px;
-          font-weight: bold;
-          color: rgb(88, 99, 128);
-          cursor: pointer;
-        }
-
-        hr {
-          border: 0.5px solid rgb(88, 99, 128);
-        }
+      hr {
+        border: 0.5px solid rgb(88, 99, 128);
       }
     }
   }

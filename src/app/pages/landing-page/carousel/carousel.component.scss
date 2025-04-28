@@ -1,13 +1,77 @@
 .carousel-container {
+  width: 100%;
 
-  @media screen and (max-width: 830px) {
-    max-width: 550px;
-  }
   .heading {
     color: #586380;
-    font-size: 19px;
+    font-size: 16px;
+    font-weight: 600;
   }
 
+  .carousel {
+    position: relative;
+
+    .back-button-container,
+    .next-button-container {
+      opacity: 0;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .back-button-container {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      height: 100%;
+      width: 40px;
+      transform: translateY(-50%);
+      background: linear-gradient(270deg, #fff7, transparent),
+        linear-gradient(90deg, #ffff, transparent);
+    }
+
+    .next-button-container {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      height: 100%;
+      width: 50px;
+      transform: translateY(-50%);
+      background: linear-gradient(270deg, #fff7, transparent),
+        linear-gradient(90deg, #ffff, transparent);
+    }
+    button {
+      border: none;
+      background: transparent;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #edeff4;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+      cursor: pointer;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &:hover {
+        display: flex;
+      }
+      &.back {
+        img {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
 }
-
-
+::ng-deep {
+  .p-ripple.p-carousel-next-button,
+  .p-carousel-prev-button.p-disabled,
+  .p-carousel-indicator-list {
+    display: none !important;
+  }
+}

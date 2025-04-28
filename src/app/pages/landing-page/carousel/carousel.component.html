@@ -1,18 +1,36 @@
 <div class="carousel-container">
   <h2 id="heading" class="heading">{{ title }}</h2>
   @if (contentTemplate) {
-  <p-carousel
-    [value]="items"
-    [numVisible]="3"
-    [numScroll]="3"
-    [circular]="false"
-    [responsiveOptions]="responsiveOptions"
-  >
-    <ng-template pTemplate="item" let-item>
-      <ng-container
-        *ngTemplateOutlet="contentTemplate; context: { $implicit: item }"
-      ></ng-container>
-    </ng-template>
-  </p-carousel>
+  <div class="carousel">
+    <p-carousel
+      [value]="items"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+      #p_carousel
+    >
+      <ng-template pTemplate="item" let-item>
+        <ng-container
+          *ngTemplateOutlet="contentTemplate; context: { $implicit: item }"
+        ></ng-container>
+      </ng-template>
+    </p-carousel>
+
+    <div class="back-button-container">
+      <button class="back" (click)="p_carousel.navBackward($event)">
+        <img src="assets/svg/right-arrow.svg" alt="back" height="20" width="20" />
+      </button>
+    </div>
+  
+    <div class="next-button-container">
+      <button (click)="p_carousel.navForward($event)">
+        <img src="assets/svg/right-arrow.svg" alt="back" height="20" width="20" />
+      </button>
+    </div>
+  </div>
+
+  
+
   }
 </div>

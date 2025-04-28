@@ -31,6 +31,7 @@ export class LogInComponent implements OnInit {
     this.authService
       .login({ email: this.email, password: this.password })
       .pipe(
+        delay(3000),
         finalize(() => {
           this.isRequestSent = false
         })

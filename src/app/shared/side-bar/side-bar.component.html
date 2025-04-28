@@ -1,21 +1,23 @@
-<div class="sidebar-container">
+<div class="sidebar-container" [class.minimize-sidebar]="!sidebarState">
 
   <button [routerLink]="['']">
     <img src="assets/svg/home.svg" alt="home icon" height="20" width="20">
-    Home
+   <p>Home</p> 
   </button>
 
   <button [routerLink]="['', 'my-library', 'flashcards']">
     <i class="pi pi-folder-open"></i>
-    My Library
+   <p>My Library</p> 
   </button>
 
   <button>
     <i class="pi pi-bell"></i>
-    Notifications
+    <p>Notifications</p>
   </button>
 
   <hr />
+
+  <p class="start-title">Start here</p>
 
   <button [routerLink]="['', 'create-flashcard']">
     <img
@@ -24,10 +26,10 @@
       height="20"
       width="20"
     />
-    Flashcards
+    <p>Flashcards</p>
   </button>
   <button>
     <i class="pi pi-book"></i>
-    Solutions
+    <p>Solutions</p>
   </button>
 </div>

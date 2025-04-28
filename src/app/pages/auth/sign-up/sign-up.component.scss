@@ -47,6 +47,17 @@
 
   .email-data {
     width: 100%;
+    position: relative;
+
+    .form-overlay {
+      position: absolute;
+      background: rgb(212, 210, 210);
+      opacity: 0.5;
+      height: 100%;
+      width: 100%;
+      z-index: 2;
+      border-radius: 10px;
+    }
     .or-email {
       position: relative;
       display: flex;
@@ -124,13 +135,19 @@
           margin: 0 5px;
           cursor: pointer;
         }
+
+        pre {
+          text-wrap: auto;
+
+          .terms-of-service {
+            text-decoration: none;
+            color: #586380;
+            font-weight: 600;
+          }
+        }
       }
 
-      .terms-of-service {
-        text-decoration: none;
-        color: #586380;
-        font-weight: 600;
-      }
+      
 
       .sign-up {
         position: relative;
@@ -144,6 +161,10 @@
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
+        }
+
+        .disabled {
+          opacity: 0.5;
         }
 
         .spinner {

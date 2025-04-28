@@ -2,20 +2,14 @@
   background: #f6f7fb;
   height: 100vh;
 
-  p-tabs {
-    background: transparent;
-  }
-
-  p-tablist {
-    background: transparent;
-  }
-  p-tabpanels {
+  p-tabs, p-tablist, p-tabpanels {
     background: transparent;
   }
 
   ::ng-deep {
     .p-tablist-tab-list {
       background: transparent;
+      border-radius: 10px;
     }
   }
 }

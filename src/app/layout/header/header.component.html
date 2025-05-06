@@ -1,12 +1,27 @@
 <header>
   <div class="header-container">
     <div class="left-section">
-      <button class="menu">
+      <button class="menu" (click)="toggleSidebar()">
         <i class="pi pi-bars"></i>
       </button>
       <div class="logo" [routerLink]="['']">
         <h1>Q</h1>
       </div>
+
+      @if (!isLoggedInSignal()) {
+      <app-pop-handler class="study-tools-popup">
+        <div button_ui class="button-ui">
+          Study tools
+          <img
+            src="assets/svg/right-arrow.svg"
+            alt="down arrow"
+            height="20"
+            width="20"
+          />
+        </div>
+        <div popup_ui class="pop-ui">popup ui</div>
+      </app-pop-handler>
+      }
     </div>
 
     <div class="middle-section" tabindex="0">
@@ -17,8 +32,8 @@
         <img
           src="assets/svg/search.svg"
           alt="search filter"
-          height="15"
-          width="15"
+          height="19"
+          width="19"
         />
         <input
           #inputText
@@ -28,8 +43,15 @@
         />
       </div>
 
-      @if (isFilterPopupOpen) {
-      <div class="filter-popup" [style.display]="recommendedWords.length > 0 ? 'block' : 'none'">
+      @if (hasSearched) {
+      <div class="search-notification">
+        <p>Search activity detected</p>
+      </div>
+      } @if (isFilterPopupOpen) {
+      <div
+        class="filter-popup"
+        [style.display]="recommendedWords.length > 0 ? 'block' : 'none'"
+      >
         @for (word of recommendedWords; track $index) {
         <div class="recommendation">
           <img
@@ -46,7 +68,8 @@
     </div>
 
     <div class="right-section">
-      <div class="create">
+      @if(isLoggedInSignal()) {
+      <div class="create-icon">
         <button>
           <i class="pi pi-plus"></i>
         </button>
@@ -56,15 +79,6 @@
         <p>Upgrade: free 7-day trial</p>
         <p>Free trial</p>
       </div>
-      @if (isLoggedInSignal()) {
-        <button class="logout" (click)="logout()">Log out
-          
-      </button>
-      } @else {
-        <button class="login" [routerLink]="['', 'auth', 'log-in']">
-          Log in
-        </button>
-      }
 
       <div class="circle-container" (click)="$event.stopPropagation()">
         <button class="circle" (click)="isPopupOpen = true">
@@ -77,28 +91,66 @@
         </button>
 
         @if (isPopupOpen) {
+
         <div class="popup">
-          <button>
-            <i class="pi pi-trophy"></i>
-            Achievements
-          </button>
-          <button>
-            <i class="pi pi-cog"></i>
-            Settings
-          </button>
-          <button>
-            <i class="pi pi-moon"></i>
-            Dark Mode
-          </button>
-          <hr />
-          <button (click)="logout()">Log out</button>
-          <hr />
-          <button [routerLink]="['', 'privacy']" routerLinkActive="router-link-active" >Privacy policy</button>
-          <button>Help and feedback</button>
-          <button>Upgrade</button>
+          <div class="user">
+            <img src="assets/svg/user.svg" alt="user's avatar" />
+            <div class="user-info">
+              <div class="username">
+                <p>john_doe</p>
+              </div>
+              <div class="email">
+                <p>johndoe&#64;gmail.com</p>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="options">
+            <button>
+              <i class="pi pi-trophy"></i>
+              Achievements
+            </button>
+            <button>
+              <i class="pi pi-cog"></i>
+              Settings
+            </button>
+            <button>
+              <i class="pi pi-moon"></i>
+              Dark Mode
+            </button>
+            <hr />
+            <button (click)="logout()">Log out</button>
+            <hr />
+            <button
+              [routerLink]="['', 'privacy']"
+              routerLinkActive="router-link-active"
+            >
+              Privacy policy
+            </button>
+            <button>Help and feedback</button>
+            <button>Upgrade</button>
+          </div>
+          
         </div>
         }
       </div>
+
+      } @else {
+      <div class="create-section">
+        <button>
+          <i class="pi pi-plus"></i>
+          <span>Create</span>
+        </button>
+      </div>
+      
+      <button class="login" [routerLink]="['', 'auth', 'log-in']">
+        Log in
+      </button>
+    }
     </div>
   </div>
 </header>
+@if (isAuthenticationModalShown) {
+  <app-authentication></app-authentication>
+}

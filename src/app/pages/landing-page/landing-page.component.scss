@@ -1,24 +1,27 @@
+@use "responsive";
+
 .landing-page-container {
   display: flex;
-  padding-top: 40px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f6f7fb;
-  min-height: 100vh;
-  // padding-left: 380px;
-  // padding-right: 380px;
 
   .sidebar {
     display: none;
 
-    @media screen and (min-width:1530px) {
+    @media screen and (max-width: 1024px) {
       display: block;
     }
   }
 
   main {
     width: 100%;
-    padding: 40px 20px;
-    
+    margin: 40px 20px;
+    background: white;
+
+    .recents-title {
+      color: #5a6581;
+      font-size: 17px;
+      font-weight: 600;
+    }
 
     .loading-items-container {
       display: flex;
@@ -33,8 +36,21 @@
       }
     }
 
-    @media screen and (min-width: 1530px) {
-      padding: 40px 200px;
+    @media screen and (min-width: 320px) {
+      margin: 160px 20px;
+    }
+
+    @media screen and (min-width: 380px) {
+      margin: 120px 20px;
+    }
+
+    @media screen and (min-width: 620px) {
+      margin: 80px 20px;
+
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding-right: 150px;
     }
   }
 
@@ -43,22 +59,29 @@
   .question {
     border: 2px solid #edeff4;
     border-radius: 10px;
-    margin: 1rem;
+    margin: 0;
+    width: calc(100% - 20px);
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 5px solid rgb(75, 141, 228);
+    }
+
+    @media screen and (min-width: 1024px) {
+      max-width: 370px;
+    }
   }
 
   .flashcard {
     padding: 0 1rem;
-    height: 170px;
-    max-width: 430px;
+    height: 196px;
+
     .title {
-      font-size: 18px;
       font-weight: 600;
-      min-height: 72px;
-      margin: 0;
+      margin: 1.3rem 0;
     }
 
     .total-terms {
-      font-size: 14px;
       background: #edefff;
       border-radius: 20px;
       font-weight: 600;
@@ -73,12 +96,10 @@
       column-gap: 0.5rem;
 
       .username {
-        font-size: 18px;
         font-weight: 600;
       }
 
       .teacher {
-        font-size: 15px;
         background: #edefff;
         border-radius: 20px;
         padding: 5px;
@@ -88,91 +109,203 @@
   }
 
   .textbook {
-    height: 150px;
-    max-width: 390px;
     display: flex;
     justify-content: left;
     align-items: center;
     column-gap: 1.5rem;
-    padding-left: 0.5rem;
+    padding: 0.5rem;
 
     img {
       border-radius: 8px;
     }
-
-    .info {
-      .title {
-        max-width: 150px;
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0;
-        margin-bottom: 0.3rem;
-      }
-      .edition-isbn {
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        font-weight: 600;
-        column-gap: 5px;
-        margin-bottom: 0.3rem;
-        white-space: nowrap;
-
-        p {
-          margin: 0;
-        }
-      }
-
-      .authors {
-        font-size: 13px;
-        font-weight: 600;
-        margin: 0;
-        margin-bottom: 0.5rem;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        max-width: 150px;
-      }
-
-      .totalTerms {
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-        background: #edefff;
-        border-radius: 10px;
-        padding: 0.2rem;
-        column-gap: 0.5rem;
-        max-width: 120px;
-
-        p {
-          margin: 0;
-          font-weight: 600;
-        }
-
-        i {
-          padding-left: 0.5rem;
-          font-size: 13px;
-        }
-      }
+    .textbook-photo {
+      display: flex;
     }
   }
 
-  .question {
-    height: 150px;
-    max-width: 390px;
-    padding: 1rem;
-    overflow: hidden;
-    font-size: 14px;
-
+  .info {
     .title {
-      color: #5a6581;
+      max-width: 150px;
       font-weight: 600;
+      margin: 0;
+      margin-bottom: 0.3rem;
+      font-size: 17px;
+    }
+
+    .authors,
+    .edition-isbn {
+      color: rgb(88, 99, 128);
+      font-size: 13px;
+    }
+    .edition-isbn {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      column-gap: 5px;
+      margin-bottom: 0.3rem;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .authors {
+      font-weight: 600;
+      margin: 0;
+      margin-bottom: 0.5rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 150px;
+    }
+
+    .totalTerms {
+      display: flex;
+      align-items: center;
+      background: #edefff;
+      border-radius: 10px;
+      padding: 0.2rem;
+      column-gap: 0.5rem;
+      max-width: 150px;
+      font-size: 13px;
+
+      p {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      i {
+        padding-left: 0.5rem;
+      }
     }
   }
 }
+
+.question {
+  padding: 1rem;
+  overflow: hidden;
+
+  .title {
+    color: #5a6581;
+    font-weight: 600;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+  }
+  .filter {
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    opacity: 0.7;
+    bottom: 10px;
+    z-index: 1;
+    background: white;
+    max-width: 350px;
+  }
+}
+
+@include responsive.min-width("xxs") {
+  .flashcard,
+  .textbook,
+  .question {
+  }
+  .textbook-photo {
+    display: none;
+  }
+
+  .info {
+    overflow: hidden;
+
+    .title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 15px;
+    }
+  }
+}
+
+.flashcard {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    font-size: 17px;
+  }
+  .total-terms {
+    font-size: 12px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+
+    .username {
+      font-size: 15px;
+    }
+    .teacher {
+      font-size: 11px;
+    }
+  }
+
+  @media screen and (min-width: 550px) {
+    .user {
+      margin-top: 2rem;
+    }
+  }
+}
+
+.textbook {
+  .title {
+    font-size: 14px;
+  }
+  .edition-isbn {
+    font-size: 10px;
+  }
+  .authors {
+    font-size: 11px;
+  }
+  .totalTerms {
+    font-size: 11px;
+
+    .pi-star-fill {
+      font-size: 11px;
+    }
+  }
+}
+
+.question {
+  height: 152px;
+  title {
+    font-size: 14px;
+  }
+  .description {
+    margin-top: 1rem;
+    font-size: 14px;
+  }
+}
+
+@include responsive.min-width("xs") {
+
+  .user-photo {
+    display: flex;
+  }
+}
+
 
 ::ng-deep {
   .p-carousel-content-container {
     width: 100%;
   }
-
 }

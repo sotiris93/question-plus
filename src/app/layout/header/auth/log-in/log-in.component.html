@@ -1,5 +1,6 @@
 <main>
   <div class="login-container">
+   
     <div class="social-media">
       <!-- create google account -->
       <a
@@ -19,10 +20,10 @@
       <a
         href=""
       >
-        <button class="google">
+        <button class="facebook">
           <img
             src="assets/svg/facebook.svg"
-            alt="google logo"
+            alt="facebook logo"
             height="25"
             width="25"
           />
@@ -50,7 +51,7 @@
       <span>or email</span>
     </div>
 
-    <form (ngSubmit)="login()">
+    <form #form="ngForm" (ngSubmit)="login()">
       <label>Email</label>
       <input
         type="email"
@@ -78,9 +79,11 @@
         By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></pre>
 
         <div class="submit-button">
-          <button class="submit" type="submit" [disabled]="isRequestSent"
-          [ngStyle]="{'opacity': isRequestSent ? '0.1' : '1',
-           'cursor': isRequestSent ? 'not-allowed' : 'pointer'}">Log in</button>
+          @if (isRequestSent) {
+            <div class="form-overlay"></div>
+          }
+          <button class="submit" type="submit" [disabled]="isRequestSent || form.invalid"
+          [ngStyle]="{'cursor': isRequestSent ? 'not-allowed' : 'pointer'}">Log in</button>
            
             @if (isRequestSent) {
               <div class="spinner">

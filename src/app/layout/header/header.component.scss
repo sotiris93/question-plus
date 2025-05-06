@@ -1,32 +1,49 @@
+@use "responsive";
+
 .header-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas: "left middle right";
-  height: 40px;
+  height: 64px;
+  padding: 0 1rem;
+  position: fixed;
+  background: white;
+  z-index: 1;
+  width: 100%;
 
-  @media screen and (max-width: 660px) {
-    grid-template-columns: 1fr;
+  @media screen and (min-width: 320px) {
+    grid-template-areas:
+      "left"
+      "right"
+      "middle";
+      padding-top: 10px;
+  }
+
+  @media screen and (min-width: 380px) {
+      grid-template-columns: 1fr 2fr;
+  }
+
+  @media screen and (min-width: 450px) {
     grid-template-areas:
       "left right"
       "middle middle";
-    height: 40px;
-  }
+      grid-template-columns: 1fr 2fr;
+    }
 
-  @media screen and (max-width: 350px) {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-    "left"
-    "right"
-    "middle"
-    ;
+  @media screen and (min-width: 620px) {
+    grid-template-areas: "left middle right";
+    padding-top: 0;
+    margin-bottom: 3rem;
   }
   .left-section {
     grid-area: left;
     display: flex;
-    width: 100%;
+    width: fit-content;
     column-gap: 1rem;
 
-    @media screen and (max-width: 1110px) {
+    @media screen and (min-width: 1110px) {
       width: 10%;
       height: 40px;
     }
@@ -36,37 +53,84 @@
       background: transparent;
       padding: 10px;
       cursor: pointer;
+
+      &:hover {
+        background: rgb(232, 231, 231);
+        border-radius: 100%;
+      }
+
+      .pi-bars {
+        font-size: 22px;
+        color: rgb(88, 99, 128);
+      }
     }
     .logo {
+      display: flex;
+      align-items: center;
       h1 {
-        color: blue;
+        font-size: 40px;
+        color: var(--primary-color);
         margin: 0;
         cursor: pointer;
+      }
+    }
+
+    .study-tools-popup {
+      display: flex;
+      align-items: center;
+
+      .button-ui {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        white-space: nowrap;
+        img {
+          transform: rotateZ(90deg);
+        }
+      }
+
+      .popup-ui {
       }
     }
   }
 
   .middle-section {
     grid-area: middle;
-    width: 100%;
-    min-width: 200px;
-    height: 100%;
+    width: clamp(250px, 600px, 100%);
+    height: 40px;
     position: relative;
     z-index: 100;
+    background: rgb(246, 247, 251);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    
 
     &:focus-within {
-      border: 2px solid blue;
-      border-radius: 10px;
+      background: white;
+      border: 2px solid var(--primary-color);
     }
 
     @media screen and (max-width: 1110px) {
       height: 40px;
       width: 60%;
     }
+
+    @include responsive.min-width("xxs") {
+      width: auto;
+      margin: 1rem 0;
+    }
+
+    @include responsive.min-width("sm") {
+      
+    }
+
+    @media screen and (min-width: 620px) {
+      margin-top: none;
+    }
     .search {
-      background: #edeff4;
-      color: #939bb4;
-      padding: 0.5rem;
+      position: relative;
+      color: rgb(147, 155, 180);
+      padding: 1rem;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -74,6 +138,34 @@
       max-width: 600px;
       width: 100%;
       height: 100%;
+      font-size: 20px;
+
+      img {
+        margin-left: 0.2rem;
+      }
+
+      input {
+        color: rgb(147, 155, 180);
+        font-weight: bold;
+        font-size: 16px;
+
+        &::placeholder {
+          font-size: 15px;
+          color: rgb(147, 155, 180);
+        }
+      }
+    }
+    .search-notification {
+      position: absolute;
+      background: aqua;
+      transform: translate(-100%);
+      font-size: 18px;
+      border-radius: 20px;
+
+      p {
+        margin: 0;
+        padding: 5px;
+      }
     }
 
     .filter-popup {
@@ -114,25 +206,26 @@
   .right-section {
     grid-area: right;
     display: flex;
-    justify-content: end;
     align-items: center;
-    width: 100%;
+    // width: 100%;
     column-gap: 1rem;
+    z-index: 1;
+    margin-left: 1.5rem;
 
-    @media screen and (max-width: 1110px) {
-      // width: 80%;
-      width: 370px;
+    @media screen and (min-width: 380px) {
+      display: flex;
+      justify-content: flex-end;
     }
 
-    @media screen and (max-width: 460px) {
-      width: 100%;
-    }
-
-    .create {
-      background: blue;
-      height: 100%;
-      border-radius: 10px;
+    .create-icon {
+      background: var(--primary-color);
+      height: 40px;
+      border-radius: 50%;
       width: 40px;
+
+      &:hover {
+        background: blue;
+      }
       button {
         background: transparent;
         border: none;
@@ -140,68 +233,159 @@
         height: 100%;
         width: 100%;
         padding: 0.5rem;
+        cursor: pointer;
+
+       
+
+        .pi-plus {
+          font-size: 19px;
+        }
+      }
+    }
+
+    .create-section {
+      button {
+        display: flex;
+        align-items: center;
+        column-gap: 0.7rem;
+        border: none;
+        color: var(--primary-color);
+        font-size: 15px;
+        background: transparent;
+        cursor: pointer;
+
+        .pi-plus {
+          font-size: 14px;
+        }
       }
     }
 
     .upgrade {
       background: rgb(247, 207, 5);
-      border-radius: 10px;
-      padding: 0.5rem;
+      border-radius: 20px;
+      padding: 0.7rem 1rem;
+      white-space: nowrap;
       height: 100%;
       display: flex;
       align-items: center;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        background: rgb(239, 212, 76);
+      }
 
       p:first-child {
-        margin: 0;
-      }
-      p:last-child {
         display: none;
       }
+      p:last-child {
+        display: flex;
+        margin: 0;
+      }
 
-      @media screen and (max-width: 460px) {
+      @media screen and (min-width: 768px) {
         p:first-child {
-          display: none;
+          margin: 0;
+          max-width: 140px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          display: block;
         }
         p:last-child {
-          margin: 0;
-          display: flex;
+          display: none;
+        }
       }
-      }
-  }
 
-    .logout {
-      cursor: pointer;
-
-      &:disabled {
-        cursor: not-allowed;
+      @media screen and (min-width: 1300px) {
+        p:first-child {
+          max-width: none;
+        }
       }
     }
-    .circle-container {
-      position: relative;
-      width: fit-content;
-      .circle {
+
+    .login {
+      height: 40px;
+      width: 75px;
+      border-radius: 20px;
+      background: var(--primary-color);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+  }
+  .circle-container {
+    position: relative;
+    width: fit-content;
+    .circle {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+
+      img {
         height: 40px;
         width: 40px;
         border-radius: 50%;
-        border: none;
-        background: transparent;
-        cursor: pointer;
+      }
+    }
+
+    .popup {
+      position: absolute;
+      height: 435px;
+      width: 330px;
+      right: 0;
+      top: calc(100% + 1rem);
+      background: white;
+      z-index: 1;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 1rem;
+        margin-left: 1.5rem;
 
         img {
+          height: 60px;
+          width: 60px;
           border-radius: 50%;
+        }
+
+        .user-info {
+          display: flex;
+          flex-direction: column;
+          .username,
+          .email {
+            p {
+              font-size: 14px;
+              margin: 0.2rem 0.5rem;
+            }
+          }
+
+          .username {
+            font-weight: bold;
+          }
+          .email {
+            font-weight: bold;
+            color: rgb(121, 118, 118);
+          }
         }
       }
 
-      .popup {
-        position: absolute;
-        height: 300px;
-        width: 200px;
-        right: 0;
-        top: calc(100% + 1rem);
-        background: white;
-        z-index: 1;
-        border-radius: 10px;
-
+      .options {
+        margin: 0 0.5rem;
+        column-gap: 1rem;
+        display: flex;
+        flex-direction: column;
         button {
           display: flex;
           border: none;
@@ -213,11 +397,13 @@
           color: rgb(88, 99, 128);
           cursor: pointer;
         }
-
+  
         hr {
-          border: 0.5px solid rgb(88, 99, 128);
+          border: 0.5px solid rgb(237,239,244);
         }
       }
+
+    
     }
   }
 }

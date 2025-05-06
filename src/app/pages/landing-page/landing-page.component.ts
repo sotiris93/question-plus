@@ -10,21 +10,22 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from './carousel/carousel.component';
 import { forkJoin } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
   imports: [
     SideBarComponent,
-    ProfileProgressComponent,
     CarouselModule,
     ButtonModule,
     CommonModule,
     CarouselComponent,
+    RouterLink
 ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
-export class LandingPageComponent implements AfterViewInit {
+export class LandingPageComponent implements OnInit {
   popularFlashCardsTemplate!: TemplateRef<any>;
   popularQuestionsTemplate!: TemplateRef<any>;
   popularTextbooksTemplate!: TemplateRef<any>;
@@ -74,7 +75,7 @@ export class LandingPageComponent implements AfterViewInit {
   ];
 
   constructor(private landingPageService: LandingPageService) {}
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
       this.loadData();
   }
 
@@ -85,25 +86,30 @@ export class LandingPageComponent implements AfterViewInit {
       this.landingPageService.getPopularQuestions(),
     ]).subscribe({
       next: ([flashcardsResponse, textBookresponse, questionsResponse]) => {
-        
-        this.carousels[0] = {
-          title: 'Popular Flashcards',
-          items: Object.values(flashcardsResponse),
-          template: this.popularFlashCardsTemplate,
-          isLoaded: true,
-        };
-        this.carousels[1] = {
-          title: 'Popular Textbooks',
-          items: Object.values(textBookresponse),
-          template: this.popularTextbooksTemplate,
-          isLoaded: true,
-        };
-        this.carousels[2] = {
-          title: 'Popular Questions',
-          items: Object.values(questionsResponse),
-          template: this.popularQuestionsTemplate,
-          isLoaded: true,
-        };
+        this.carousels[0].items = Object.values(flashcardsResponse);
+        this.carousels[0].isLoaded = true;
+        this.carousels[1].items = Object.values(textBookresponse);
+        this.carousels[1].isLoaded = true;
+        this.carousels[2].items = Object.values(questionsResponse);
+        this.carousels[2].isLoaded = true;
+        // this.carousels[0] = {
+        //   title: 'Popular Flashcards',
+        //   items: Object.values(flashcardsResponse),
+        //   template: this.popularFlashCardsTemplate,
+        //   isLoaded: true,
+        // };
+        // this.carousels[1] = {
+        //   title: 'Popular Textbooks',
+        //   items: Object.values(textBookresponse),
+        //   template: this.popularTextbooksTemplate,
+        //   isLoaded: true,
+        // };
+        // this.carousels[2] = {
+        //   title: 'Popular Questions',
+        //   items: Object.values(questionsResponse),
+        //   template: this.popularQuestionsTemplate,
+        //   isLoaded: true,
+        // };
       },
       error: (error) => {
         console.error('Error while retrieving the data', error);

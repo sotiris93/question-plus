@@ -1,96 +1,99 @@
 <div class="landing-page-container">
-  <div class="sidebar">
-    <!-- move it to the layout component -->
-    <app-side-bar></app-side-bar>
-  </div>
-  <main>
+<div class="sidebar">
+  <!-- move it to the layout component -->
+  <app-side-bar></app-side-bar>
+</div>
+<main>
+  
+
+  <!-- <div class="profile-progress">
+    <app-profile-progress></app-profile-progress>
+  </div> -->
+
+  <h3 class="recents-title">Recents</h3>
+
+  <ng-container *ngFor="let carousel of carousels; let i = index">
+
+    @defer (when carousels[i].isLoaded) {
+      <app-carousel
     
-
-    <div class="profile-progress">
-      <app-profile-progress></app-profile-progress>
-    </div>
-
-    <ng-container *ngFor="let carousel of carousels; let i = index">
-
-      @defer (when carousels[i].isLoaded) {
-        <app-carousel
-      
-        [title]="carousels[i].title"
-        [items]="carousels[i].items"
-        [contentTemplate]="carousels[i].template"
-      ></app-carousel>
-      } @placeholder {
-        <p style="height: 30px;visibility: hidden;">sff</p>
-        <div class="loading-items-container">
-          
-          <div class="skeleton-box"></div>
-          <div class="skeleton-box"></div>
-          <div class="skeleton-box"></div>
-        </div>
-      }
-    </ng-container>
-  </main>
-
-  <ng-template pTemplate="item" let-flashCard #popularFlashCardsTemplate>
-    
-    <div class="flashcard">
-      
-      <p class="title">{{ flashCard.title }}</p>
-      <p class="total-terms">{{ flashCard.totalTerms }} terms</p>
-      <div class="user">
-        <img
-          class="user-photo"
-          src="{{ flashCard.userPhoto }}"
-          [alt]="'Photo of ' + flashCard.username"
-          height="25"
-          width="25"
-        />
-        <p class="username">{{ flashCard.username }}</p>
-        @if (flashCard.teacher) {
-        <p class="teacher">Teacher</p>
-        }
+      [title]="carousels[i].title"
+      [items]="carousels[i].items"
+      [contentTemplate]="carousels[i].template"
+    ></app-carousel>
+    } @placeholder {
+      <p style="height: 30px;visibility: hidden;">sff</p>
+      <div class="loading-items-container">
+        
+        <div class="skeleton-box"></div>
+        <div class="skeleton-box"></div>
+        <div class="skeleton-box"></div>
       </div>
-    </div>
-  </ng-template>
+    }
+  </ng-container>
+</main>
 
-  <ng-template pTemplate="item" let-textBook #popularTextbooksTemplate>
-    <div class="textbook">
+<ng-template pTemplate="item" let-flashCard #popularFlashCardsTemplate>
+  
+  <div class="flashcard" [routerLink]="['flashcard']">
+    
+    <p class="title">{{ flashCard.title }}</p>
+    <p class="total-terms">{{ flashCard.totalTerms }} terms</p>
+    <div class="user">
       <img
         class="user-photo"
-        src="{{ textBook.bookCoverPath }}"
-        alt="{{ textBook.title }}"
-        height="120"
-        width="90"
+        src="{{ flashCard.userPhoto }}"
+        [alt]="'Photo of ' + flashCard.username"
+        height="25"
+        width="25"
       />
+      <p class="username">{{ flashCard.username }}</p>
+      @if (flashCard.teacher) {
+      <p class="teacher">Teacher</p>
+      }
+    </div>
+  </div>
+</ng-template>
 
-      <div class="info">
-        <p class="title">{{ textBook.title }}</p>
-        <div class="edition-isbn">
-          <p class="edition">{{ textBook.edition }} Edition</p>
-          <span>•</span>
-          <p class="isbn">ISBN: {{ textBook.primaryIsbn }}</p>
+<ng-template pTemplate="item" let-textBook #popularTextbooksTemplate>
+  <div class="textbook">
+    <img
+      class="textbook-photo"
+      src="{{ textBook.bookCoverPath }}"
+      alt="{{ textBook.title }}"
+      height="120"
+      width="90"
+    />
 
-          @if (textBook.alternateIsbns.length > 0) {
-          <p class="alternate-isbn">
-            ({{ textBook.alternateIsbns.length }}) more
-          </p>
-          }
-        </div>
-        <!-- TO BE FIXED -->
-        <p class="authors">{{ textBook.authors }}</p>
+    <div class="info">
+      <p class="title">{{ textBook.title }}</p>
+      <div class="edition-isbn">
+        <p class="edition">{{ textBook.edition }} Edition</p>
+        <span>•</span>
+        <p class="isbn">ISBN: {{ textBook.primaryIsbn }}</p>
 
-        <div class="totalTerms">
-          <i class="pi pi-star-fill"></i>
-          <p>{{ textBook.totalSolutions }} solutions</p>
-        </div>
+        @if (textBook.alternateIsbns.length > 0) {
+        <p class="alternate-isbn">
+          ({{ textBook.alternateIsbns.length }}) more
+        </p>
+        }
+      </div>
+      <!-- TO BE FIXED -->
+      <p class="authors">{{ textBook.authors }}</p>
+      
+      <div class="totalTerms">
+        <i class="pi pi-star-fill"></i>
+        <p>{{ textBook.totalSolutions }} solutions</p>
       </div>
     </div>
-  </ng-template>
+  </div>
+</ng-template>
 
-  <ng-template #popularQuestionsTemplate let-question>
-    <div class="question">
-      <p class="title">{{ question.title | titlecase }}</p>
-      <p class="description">{{ question.description }}</p>
-    </div>
-  </ng-template>
+<ng-template #popularQuestionsTemplate let-question>
+  <div class="question">
+    <p class="title">{{ question.title | titlecase }}</p>
+    <p class="description">{{ question.description }}</p>
+    <div class="filter"></div>
+  </div>
+</ng-template>
 </div>

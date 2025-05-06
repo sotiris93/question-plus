@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   inject,
   OnInit,
@@ -11,15 +12,18 @@ import { SelectItemGroup } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
-import { BehaviorSubject, debounceTime, skip, switchMap } from 'rxjs';
+import { BehaviorSubject, debounceTime, skip, Subject, switchMap, take } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
-import { AuthService } from '../../pages/auth/auth.service';
+import { AuthService } from 'layout/header/auth/auth.service';
 import { RouterModule, Router } from '@angular/router';
+import { SidebarService } from '../../services/sidebar.service';
+import { PopHandlerComponent } from "../../shared/pop-handler/pop-handler.component";
+import { AuthenticationComponent } from "./auth/authentication.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, ButtonModule, SelectModule, RouterModule],
+  imports: [FormsModule, ButtonModule, SelectModule, RouterModule, PopHandlerComponent, AuthenticationComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -33,20 +37,30 @@ export class HeaderComponent implements OnInit {
   recommendedWords: string[] = [];
   authService = inject(AuthService);
   isLoggedInSignal = signal(false);
+  userSearchesSubject = new Subject<string>();
+  hasSearched: boolean = false;
+  isSidebarOpen: boolean = true;
+  isAuthenticationModalShown: boolean = true;
 
-  constructor(
-    private popupRecommendationService: PopupRecommendationService,
-    private router: Router,
-  ) {}
+  popupRecommendationService = inject(PopupRecommendationService);
+  sidebarService = inject(SidebarService);
 
   ngOnInit(): void {
     this.getAuthStatus();
     this.getRecommendation();
+    this.sidebarService.sidebarState$.subscribe(state => this.isSidebarOpen = state);
+
+    this.userSearchesSubject.pipe(take(1)).subscribe(()=> {
+      this.hasSearched = true;
+
+      setTimeout(()=> {
+       this.hasSearched = false;
+      }, 3000)
+    })
   }
 
   @HostListener('document:click')
   onDocumentClick() {
-    console.log(this.isPopupOpen);
     this.isPopupOpen = false;
     this.isFilterPopupOpen = false;
   }
@@ -54,6 +68,7 @@ export class HeaderComponent implements OnInit {
   onSearch(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchSubject.next(input.value);
+    this.userSearchesSubject.next(input.value);
   }
 
   getRecommendation() {
@@ -84,5 +99,11 @@ export class HeaderComponent implements OnInit {
 
   getAuthStatus() {
     this.isLoggedInSignal = this.authService.authState;
+  }
+
+  toggleSidebar(): void {
+    console.log('isSidebarOpen called')
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.sidebarService.changeState(this.isSidebarOpen);
   }
 }

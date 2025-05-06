@@ -15,7 +15,7 @@
         height: 60px;
         background: transparent;
         border: 2px solid #d9dde8;
-        border-radius: 10px;
+        border-radius: 30px;
         padding: 1rem;
         display: flex;
         align-items: center;
@@ -47,6 +47,8 @@
 
   .email-data {
     width: 100%;
+    position: relative;
+
     .or-email {
       position: relative;
       display: flex;
@@ -124,16 +126,32 @@
           margin: 0 5px;
           cursor: pointer;
         }
+
+        pre {
+          text-wrap: auto;
+
+          .terms-of-service {
+            text-decoration: none;
+            color: #586380;
+            font-weight: 600;
+          }
+        }
       }
 
-      .terms-of-service {
-        text-decoration: none;
-        color: #586380;
-        font-weight: 600;
-      }
+      
 
       .sign-up {
         position: relative;
+
+        .form-overlay {
+          position: absolute;
+          background: rgb(212, 210, 210);
+          opacity: 0.5;
+          height: 100%;
+          width: 100%;
+          z-index: 2;
+          border-radius: 10px;
+        }
         .submit {
           width: 100%;
           background: #4255ff;
@@ -144,6 +162,11 @@
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
+
+        }
+
+        .disabled {
+          opacity: 0.5;
         }
 
         .spinner {

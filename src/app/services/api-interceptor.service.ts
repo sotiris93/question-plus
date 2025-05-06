@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '../pages/auth/auth.service';
+import { AuthService } from './../layout/header/auth/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const baseUrl = 'https://question-plus-7c126-default-rtdb.firebaseio.com';

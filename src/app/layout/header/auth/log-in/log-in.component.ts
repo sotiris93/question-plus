@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ProgressSpinner } from 'primeng/progressspinner';
-import { delay, finalize, take } from 'rxjs';
+import {  finalize, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({

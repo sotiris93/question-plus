@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
@@ -10,5 +10,6 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
+
 
 }

@@ -15,11 +15,15 @@
       <div class="card">
         <p-tabs [value]="selectedTab">
           <p-tablist>
-            <p-tab value="0" [routerLink]="['/auth/sign-up']">Sign up</p-tab>
-            <p-tab value="1" [routerLink]="['/auth/log-in']">Log in</p-tab>
+            <p-tab value="0" (click)="isLogin = false">Sign up</p-tab>
+            <p-tab value="1" (click)="isLogin = true">Log in</p-tab>
           </p-tablist>
         </p-tabs>
-        <router-outlet></router-outlet>
+        @if (isLogin) {
+          <app-log-in></app-log-in>
+        } @else {
+          <app-sign-up></app-sign-up>
+        }
         </div>
     </div>
   </div>

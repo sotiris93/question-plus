@@ -4,7 +4,7 @@ import { visitorGuard } from './guards/visitor.guard';
 import { canDeactivateFormGuard } from './guards/can-deactivate-form.guard';
 
 export const routes: Routes = [
-    // NORMAL PAGES
+  // NORMAL PAGES
   {
     path: '',
     loadComponent: () =>
@@ -17,7 +17,14 @@ export const routes: Routes = [
           import('./pages/landing-page/landing-page.component').then(
             (m) => m.LandingPageComponent
           ),
-      },
+        },
+          {
+            path: 'flashcard',
+            loadComponent: () =>
+              import('./pages/landing-page/flashcard/flashcard.component').then(
+                (m) => m.FlashcardComponent
+              ),
+          },
       {
         path: 'terms-of-service',
         loadComponent: () =>
@@ -29,41 +36,6 @@ export const routes: Routes = [
         path: 'privacy',
         loadComponent: () =>
           import('./privacy/privacy.component').then((m) => m.PrivacyComponent),
-      },
-      // VISITOR PAGES
-      {
-        path: '',
-        canActivate: [visitorGuard],
-        children: [
-          {
-            path: 'auth',
-            loadComponent: () =>
-              import('./pages/auth/authentication.component').then(
-                (m) => m.AuthenticationComponent
-              ),
-            children: [
-              {
-                path: 'sign-up',
-                canDeactivate: [canDeactivateFormGuard],
-                loadComponent: () =>
-                  import('./pages/auth/sign-up/sign-up.component').then(
-                    (m) => m.SignUpComponent
-                  ),
-              },
-              {
-                path: 'log-in',
-                loadComponent: () =>
-                  import('./pages/auth/log-in/log-in.component').then(
-                    (m) => m.LogInComponent
-                  ),
-              },
-              {
-                path: '**',
-                redirectTo: 'sign-up',
-              },
-            ],
-          },
-        ],
       },
 
       // AUTHENTICATION PAGES
@@ -121,8 +93,13 @@ export const routes: Routes = [
               },
             ],
           },
+         
         ],
       },
     ],
   },
+  {
+    path: '**',
+    redirectTo: '',
+  }
 ];

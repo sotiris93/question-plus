@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { AuthService } from '../auth.service';
-import { SignUpModel } from '../../../models/sign-up.model';
-import { CanComponentDeactivate } from '../../../guards/can-deactivate-form.guard';
-import { delay, finalize, Observable } from 'rxjs';
+import { SignUpModel } from 'models/sign-up.model';
+import { CanComponentDeactivate } from 'guards/can-deactivate-form.guard';
+import { finalize, Observable } from 'rxjs';
 import { ProgressSpinner } from 'primeng/progressspinner';
 
 

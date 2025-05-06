@@ -15,7 +15,7 @@
         height: 60px;
         background: transparent;
         border: 2px solid #d9dde8;
-        border-radius: 10px;
+        border-radius: 30px;
         padding: 1rem;
         display: flex;
         align-items: center;
@@ -49,15 +49,6 @@
     width: 100%;
     position: relative;
 
-    .form-overlay {
-      position: absolute;
-      background: rgb(212, 210, 210);
-      opacity: 0.5;
-      height: 100%;
-      width: 100%;
-      z-index: 2;
-      border-radius: 10px;
-    }
     .or-email {
       position: relative;
       display: flex;
@@ -151,6 +142,16 @@
 
       .sign-up {
         position: relative;
+
+        .form-overlay {
+          position: absolute;
+          background: rgb(212, 210, 210);
+          opacity: 0.5;
+          height: 100%;
+          width: 100%;
+          z-index: 2;
+          border-radius: 10px;
+        }
         .submit {
           width: 100%;
           background: #4255ff;
@@ -161,6 +162,7 @@
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
+
         }
 
         .disabled {

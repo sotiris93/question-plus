@@ -1,6 +1,5 @@
 import { CanDeactivateFn } from '@angular/router';
 import { Observable, take } from 'rxjs';
-import { SignUpComponent } from '../pages/auth/sign-up/sign-up.component';
 import { inject } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 

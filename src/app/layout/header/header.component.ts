@@ -14,15 +14,16 @@ import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { BehaviorSubject, debounceTime, skip, Subject, switchMap, take } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
-import { AuthService } from '../../pages/auth/auth.service';
+import { AuthService } from 'layout/header/auth/auth.service';
 import { RouterModule, Router } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { PopHandlerComponent } from "../../shared/pop-handler/pop-handler.component";
+import { AuthenticationComponent } from "./auth/authentication.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, ButtonModule, SelectModule, RouterModule, PopHandlerComponent],
+  imports: [FormsModule, ButtonModule, SelectModule, RouterModule, PopHandlerComponent, AuthenticationComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
   userSearchesSubject = new Subject<string>();
   hasSearched: boolean = false;
   isSidebarOpen: boolean = true;
+  isAuthenticationModalShown: boolean = true;
 
   popupRecommendationService = inject(PopupRecommendationService);
   sidebarService = inject(SidebarService);

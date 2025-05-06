@@ -1,8 +1,6 @@
 <main>
   <div class="login-container">
-    @if (isRequestSent) {
-      <div class="form-overlay"></div>
-    }
+   
     <div class="social-media">
       <!-- create google account -->
       <a
@@ -22,10 +20,10 @@
       <a
         href=""
       >
-        <button class="google">
+        <button class="facebook">
           <img
             src="assets/svg/facebook.svg"
-            alt="google logo"
+            alt="facebook logo"
             height="25"
             width="25"
           />
@@ -81,6 +79,9 @@
         By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></pre>
 
         <div class="submit-button">
+          @if (isRequestSent) {
+            <div class="form-overlay"></div>
+          }
           <button class="submit" type="submit" [disabled]="isRequestSent || form.invalid"
           [ngStyle]="{'cursor': isRequestSent ? 'not-allowed' : 'pointer'}">Log in</button>
            

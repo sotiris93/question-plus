@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { SignUpModel } from '../../models/sign-up.model';
+import { SignUpModel } from '../../../models/sign-up.model';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 

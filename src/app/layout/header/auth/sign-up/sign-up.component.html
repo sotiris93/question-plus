@@ -31,9 +31,6 @@
   </div>
 
   <div class="email-data">
-    @if (isRequestSent) {
-      <div class="form-overlay"></div>
-    }
     
     <div class="or-email">
       <hr />
@@ -172,9 +169,13 @@
       </label>
 
       <div class="sign-up">
+        @if (isRequestSent) {
+          <div class="form-overlay"></div>
+        }
         <button class="submit" type="submit" [disabled]="form.invalid || isRequestSent" [class.disabled]="form.invalid">
           Sign up
         </button>
+        
         
         @if (isRequestSent) {
           <div class="spinner">

@@ -104,30 +104,34 @@
               </div>
             </div>
           </div>
+          <hr>
 
-          <button>
-            <i class="pi pi-trophy"></i>
-            Achievements
-          </button>
-          <button>
-            <i class="pi pi-cog"></i>
-            Settings
-          </button>
-          <button>
-            <i class="pi pi-moon"></i>
-            Dark Mode
-          </button>
-          <hr />
-          <button (click)="logout()">Log out</button>
-          <hr />
-          <button
-            [routerLink]="['', 'privacy']"
-            routerLinkActive="router-link-active"
-          >
-            Privacy policy
-          </button>
-          <button>Help and feedback</button>
-          <button>Upgrade</button>
+          <div class="options">
+            <button>
+              <i class="pi pi-trophy"></i>
+              Achievements
+            </button>
+            <button>
+              <i class="pi pi-cog"></i>
+              Settings
+            </button>
+            <button>
+              <i class="pi pi-moon"></i>
+              Dark Mode
+            </button>
+            <hr />
+            <button (click)="logout()">Log out</button>
+            <hr />
+            <button
+              [routerLink]="['', 'privacy']"
+              routerLinkActive="router-link-active"
+            >
+              Privacy policy
+            </button>
+            <button>Help and feedback</button>
+            <button>Upgrade</button>
+          </div>
+          
         </div>
         }
       </div>
@@ -147,3 +151,6 @@
     </div>
   </div>
 </header>
+@if (isAuthenticationModalShown) {
+  <app-authentication></app-authentication>
+}

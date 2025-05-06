@@ -37,41 +37,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./privacy/privacy.component').then((m) => m.PrivacyComponent),
       },
-      // VISITOR PAGES
-      {
-        path: '',
-        canActivate: [visitorGuard],
-        children: [
-          {
-            path: 'auth',
-            loadComponent: () =>
-              import('./pages/auth/authentication.component').then(
-                (m) => m.AuthenticationComponent
-              ),
-            children: [
-              {
-                path: 'sign-up',
-                canDeactivate: [canDeactivateFormGuard],
-                loadComponent: () =>
-                  import('./pages/auth/sign-up/sign-up.component').then(
-                    (m) => m.SignUpComponent
-                  ),
-              },
-              {
-                path: 'log-in',
-                loadComponent: () =>
-                  import('./pages/auth/log-in/log-in.component').then(
-                    (m) => m.LogInComponent
-                  ),
-              },
-              {
-                path: '**',
-                redirectTo: 'sign-up',
-              },
-            ],
-          },
-        ],
-      },
 
       // AUTHENTICATION PAGES
       {
@@ -128,8 +93,13 @@ export const routes: Routes = [
               },
             ],
           },
+         
         ],
       },
     ],
   },
+  {
+    path: '**',
+    redirectTo: '',
+  }
 ];

@@ -16,7 +16,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-landing-page',
   imports: [
     SideBarComponent,
-    ProfileProgressComponent,
     CarouselModule,
     ButtonModule,
     CommonModule,

@@ -52,31 +52,37 @@
     </div>
 
     <form #form="ngForm" (ngSubmit)="login()">
-      <label>Email</label>
-      <input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        placeholder="Enter your email address or username"
-        #emailField="ngModel"
-        minlength="8"
-        required
-      />
+      <div class="email">
+        <label>Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Enter your email address or username"
+          #emailField="ngModel"
+          minlength="8"
+          required
+        />
+      </div>
+     
 
-      <label>Password</label>
-      <input
-        type="text"
-        [(ngModel)]="password"
-        name="email"
-        placeholder="Enter your password"
-        aria-placeholder="Enter your password"
-        #passwordField="ngModel"
-        minlength="8"
-        required
-      />
+      <div class="password">
+        <label>Password</label>
+        <input
+          type="text"
+          [(ngModel)]="password"
+          name="email"
+          placeholder="Enter your password"
+          aria-placeholder="Enter your password"
+          #passwordField="ngModel"
+          minlength="8"
+          required
+        />
+      </div>
+     
 
-      <pre>
-        By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></pre>
+      <p class="terms">
+        By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></p>
 
         <div class="submit-button">
           @if (isRequestSent) {

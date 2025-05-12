@@ -5,7 +5,10 @@
 
   @if (isPopupVisible) {
   <div class="popup-ui">
-    <ng-content select="[popup_ui]"></ng-content>
+    
+    <ng-content select="[popup_ui]">
+      
+    </ng-content>
   </div>
   }
 </div>

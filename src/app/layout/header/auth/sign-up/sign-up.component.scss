@@ -1,22 +1,25 @@
 .sign-up-container {
   width: 100%;
+  height: 100%;
   font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   .social-media {
     display: flex;
+    justify-content: space-between;
     column-gap: 1rem;
-    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    margin-top: 1.5rem;
+    width: 100%;
 
     a {
       text-decoration: none;
 
       .google,
       .facebook {
-        height: 60px;
+        height: 48px;
         background: transparent;
         border: 2px solid #d9dde8;
         border-radius: 30px;
-        padding: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -25,23 +28,29 @@
         font-size: 16px;
         font-weight: 600;
         cursor: pointer;
+
+        &:hover {
+          background: rgb(236, 236, 236);
+        }
       }
+    }
+
+    .google-link {
+      width: 100%;
     }
 
     .google {
       width: 100%;
-      max-width: 200px;
+      padding: 0 1.5rem;
+      column-gap: 0.5rem;
       p {
-        font-size: 13px;
-
-        @media screen and (min-width:40px) {
-          display: none;
-        }
-
-        @media screen and (min-width:240px) {
-          display: flex;
-        }
+        font-size: 16px;
+        text-align: start;
       }
+    }
+
+    .facebook {
+      width: 48px;
     }
   }
 
@@ -53,6 +62,7 @@
       position: relative;
       display: flex;
       align-items: center;
+      margin-bottom: 1rem;
 
       hr {
         border: 1px solid;
@@ -80,6 +90,13 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        font-size: 13px;
+        color: #586380;
+        margin: 0;
+
+        h3 {
+          margin: 0;
+        }
 
         .pi-info-circle {
           font-size: 20px;
@@ -88,13 +105,38 @@
 
       .card {
         display: flex;
-        column-gap: 1rem;
+        column-gap: 0.5rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+
+        p-select {
+          height: 47px;
+          width: 100%;
+          background: white;
+          color: black;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          border: 2px solid rgb(217, 221, 232);
+          max-width: 120px;
+
+          &:hover {
+            background: rgb(236, 236, 236);
+          }
+        }
+
+        @media screen and (min-width: 465px) {
+          column-gap: 1rem;
+        }
       }
 
       label {
         width: 100%;
         display: flex;
         flex-direction: column;
+        font-size: 15px;
+        font-weight: 500;
+        color: #586380;
       }
 
       label + input {
@@ -104,23 +146,37 @@
         border-radius: 7px;
         font-weight: bold;
         font-size: 16px;
+        height: 48px;
+        margin-bottom: 0.5rem;
         &:focus {
           outline: none;
         }
       }
 
-      .password {
+      input[type="password"]::placeholder {
+        font-size: 9px;
+        color: rgb(147, 155, 180);
       }
 
-      .updates {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+      input[type="checkbox"] {
+        transform: scale(2);
+        margin-right: 14px;
       }
 
+      .updates,
       .policy {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        color: #282e3e;
+      }
+
+      .updates {
+        line-height: 20px;
+      }
+
+      .policy {
+        line-height: 27px;
 
         span {
           margin: 0 5px;
@@ -138,8 +194,6 @@
         }
       }
 
-      
-
       .sign-up {
         position: relative;
 
@@ -155,14 +209,13 @@
         .submit {
           width: 100%;
           background: #4255ff;
-          border-radius: 10px;
+          border-radius: 30px;
           color: white;
-          height: 65px;
+          height: 48px;
           border: none;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-
         }
 
         .disabled {
@@ -182,13 +235,59 @@
       .login {
         background: transparent;
         border: 2px solid #d9dde8;
+        color: rgb(88, 99, 128);
+        font-size: 16px;
+        font-weight: bold;
         height: 65px;
-        border-radius: 10px;
+        border-radius: 30px;
         cursor: pointer;
+
+        &:hover {
+          background: rgb(236, 236, 236);
+        }
       }
     }
   }
   .error {
     color: red;
+  }
+
+  ::ng-deep {
+    .p-select-label {
+      color: rgb(88, 99, 128);
+      font-weight: bold;
+      padding-right: 0;
+    }
+    .p-select-dropdown {
+      padding: 0;
+    }
+
+    .p-component.p-iconwrapper {
+      width: 12px;
+    }
+
+    .p-ripple.p-tab.p-component {
+      font-size: 21px;
+    }
+ 
+  }
+
+  @media screen and (min-width: 625px) {
+    .social-media {
+      height: 64px;
+
+      .google,
+      .facebook {
+        height: 100% !important;
+      }
+
+      .facebook {
+        width: 70px;
+      }
+    }
+
+    .submit {
+      height: 64px !important;
+    }
   }
 }

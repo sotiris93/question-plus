@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselComponent } from './carousel/carousel.component';
 import { forkJoin } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { FileUploadComponent } from "../../ui/file-upload/file-upload.component";
 
 @Component({
   selector: 'app-landing-page',
@@ -20,7 +21,8 @@ import { RouterLink } from '@angular/router';
     ButtonModule,
     CommonModule,
     CarouselComponent,
-    RouterLink
+    RouterLink,
+    FileUploadComponent
 ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',

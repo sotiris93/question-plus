@@ -2,15 +2,15 @@
   
   <div class="social-media">
     <!-- create google account -->
-    <a
+    <a class="google-link"
       href=""
     >
       <button class="google">
         <img
           src="assets/svg/google.svg"
           alt="google logo"
-          height="30"
-          width="30"
+          height="23"
+          width="23"
         />
        <p>Continue with Google</p> 
       </button>
@@ -158,11 +158,11 @@
           #termsField = "ngModel"
           required
         />
-        <div class="error">
+        <!-- <div class="error">
           @if (termsField.untouched) {
             <p>You must accept the Terms of Service</p>
           }
-        </div>
+        </div> -->
        
         <pre>I accept Questions Plus'<a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service</a
         ></pre>

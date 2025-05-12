@@ -89,7 +89,46 @@
         }
       }
 
-      .popup-ui {
+      .popup-ui{
+
+        h4 {
+          margin:0;
+          color: rgb(138,145,166);
+          font-size: 14px;
+          padding: 0.5rem 1.2rem;
+        }
+
+        .students-data h4 {
+           color: red;
+        }
+
+        .category {
+          display: flex;
+          align-items: center;
+          column-gap: 1rem;
+          cursor: pointer;
+          padding: 0.6rem 1.5rem;
+
+          &:hover {
+            background: rgb(227, 226, 226);
+          }
+
+          p {
+            margin: 0;
+            color: rgb(138,145,166);
+            font-weight: bold;
+            font-size: 14px;
+          }
+
+        }
+
+        hr {
+          margin: 0;
+          margin-top: 0.5rem;
+          margin-bottom: 1rem;
+          border: 0.5px solid rgb(237,239,244);
+        }
+     
       }
     }
   }

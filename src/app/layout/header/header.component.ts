@@ -35,13 +35,12 @@ export class HeaderComponent implements OnInit {
   @ViewChild('middleSection') middleSection!: ElementRef;
   private searchSubject = new BehaviorSubject<string>("");
   recommendedWords: string[] = [];
-  authService = inject(AuthService);
   isLoggedInSignal = signal(false);
   userSearchesSubject = new Subject<string>();
   hasSearched: boolean = false;
   isSidebarOpen: boolean = true;
-  isAuthenticationModalShown: boolean = true;
-
+  isAuthenticationModalShown: boolean = false;
+  authService = inject(AuthService);
   popupRecommendationService = inject(PopupRecommendationService);
   sidebarService = inject(SidebarService);
 

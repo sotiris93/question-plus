@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TabsModule } from 'primeng/tabs';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CanComponentDeactivate } from 'guards/can-deactivate-form.guard';
@@ -16,6 +16,8 @@ import { SignUpComponent } from "./sign-up/sign-up.component";
 export class AuthenticationComponent implements OnInit, CanComponentDeactivate {
   selectedTab: string = '0';
   isLogin: boolean = true;
+  isModalShown: boolean = false;
+  @Output() modalVisibilityEmitter = new EventEmitter<boolean>();
 
   constructor(private route: ActivatedRoute, private router: Router) {}
   ngOnInit(): void {
@@ -27,5 +29,10 @@ export class AuthenticationComponent implements OnInit, CanComponentDeactivate {
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     console.log('canDeactivate called');
     return false;
+  }
+
+  closeModal() {
+    this.isModalShown = false;
+    this.modalVisibilityEmitter.emit(this.isModalShown);
   }
 }

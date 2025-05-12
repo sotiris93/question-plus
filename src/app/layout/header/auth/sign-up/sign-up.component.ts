@@ -26,8 +26,8 @@ import { ProgressSpinner } from 'primeng/progressspinner';
 })
 export class SignUpComponent implements OnInit, CanComponentDeactivate {
   selectedMonth!: string;
-  selectedDay!: number;
-  selectedYear!: number;
+  selectedDay!: number | string;
+  selectedYear!: number | string;
   email: string = '';
   username: string = '';
   password: string = '';
@@ -72,11 +72,13 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
     ).reverse();
   }
 
+
+
   ngOnInit(): void {
     this.initializeFormdata();
-    this.selectedMonth = this.months[0];
-    this.selectedDay = this.days[0];
-    this.selectedYear = this.years[0];
+    this.selectedMonth = 'Month';
+    this.selectedDay = 'Day';
+    this.selectedYear = 'Year';
   }
 
   signup(form: any) {

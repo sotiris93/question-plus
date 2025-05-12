@@ -19,7 +19,58 @@
             width="20"
           />
         </div>
-        <div popup_ui class="pop-ui">popup ui</div>
+        <div popup_ui class="popup-ui">
+          
+         <div class="students-data">
+          <h4>Students</h4>
+          <a class="category">
+            <img src="assets/svg/flashcards.svg" alt="flashcards" height="20" width="20">
+            <p>Flashcards</p>
+          </a>
+
+          <a class="category">
+            <img src="assets/svg/learn.svg" alt="learn" height="20" width="20">
+            <p>Learn</p>
+          </a>
+
+          <a class="category">
+            <img src="assets/svg/study.svg" alt="study" height="20" width="20">
+            <p>Study Guides</p>
+          </a>
+
+          <a class="category">
+            <img src="assets/svg/test.svg" alt="test" height="20" width="20">
+            <p>Test</p>
+          </a>
+
+          <a class="category">
+            <img src="assets/svg/solutions.svg" alt="solutions" height="20" width="20">
+            <p>Expert Solutions</p>
+          </a>
+        </div>
+
+        <hr>
+
+        <div class="teachers-data">
+           <h4>Teachers</h4>
+          <a class="category">
+            <img src="assets/svg/live.svg" alt="live" height="20" width="20">
+            <p>Live</p>
+          </a>
+
+          <a class="category">
+            <img src="assets/svg/blast.svg" alt="blast" height="20" width="20">
+            <p>Blast</p>
+          </a>
+
+          <a class="category">
+            <img src="assets/svg/categories.svg" alt="categories" height="20" width="20">
+            <p>Categories</p>
+          </a>
+        </div>
+        </div>
+        
+       
       </app-pop-handler>
       }
     </div>
@@ -144,7 +195,7 @@
         </button>
       </div>
       
-      <button class="login" [routerLink]="['', 'auth', 'log-in']">
+      <button class="login" (click)="isAuthenticationModalShown = true">
         Log in
       </button>
     }
@@ -152,5 +203,5 @@
   </div>
 </header>
 @if (isAuthenticationModalShown) {
-  <app-authentication></app-authentication>
+  <app-authentication (modalVisibilityEmitter)="isAuthenticationModalShown = $event"></app-authentication>
 }

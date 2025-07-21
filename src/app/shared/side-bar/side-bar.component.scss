@@ -1,7 +1,10 @@
 .sidebar-container {
   display: flex;
   flex-direction: column;
-  margin: 85px 16px 0 150px;
+  margin: 85px 0;
+  margin-right: 120px;
+  width: 224px;
+  transition: all 0.3s ease-in-out;
 
   button {
     background: transparent;
@@ -12,8 +15,13 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     font-size: 14px;
+    margin-bottom: 0.5rem;
+
+    i {
+      font-size: 20px;
+    }
 
     p {
       margin: 0;
@@ -37,13 +45,21 @@
     font-weight: 700;
     font-size: 14px;
     margin-left: 10px;
+    margin-bottom: 1.5rem;
   }
 }
 
 .minimize-sidebar {
+  width: 40px;
+  // margin-right: 186px;
   button > p {
     max-width: 0;
     opacity: 0;
+  }
+
+  hr {
+    width: 40px;
+    margin: 1.5rem 0;
   }
   .start-title {
     display: none;

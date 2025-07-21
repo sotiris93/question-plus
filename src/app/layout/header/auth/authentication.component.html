@@ -1,5 +1,8 @@
 <main>
   <div class="auth-container">
+    <button class="close" (click)="closeModal()">
+      <i class="pi pi-times"></i>
+    </button>
     <div class="image-container">
       <img
         src="assets/images/study.png"
@@ -20,7 +23,7 @@
           </p-tablist>
         </p-tabs>
         @if (isLogin) {
-          <app-log-in></app-log-in>
+          <app-log-in (closeModalEmitter)="closeModal()"></app-log-in>
         } @else {
           <app-sign-up></app-sign-up>
         }

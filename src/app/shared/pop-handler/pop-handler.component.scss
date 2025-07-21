@@ -12,6 +12,10 @@
         left: 0;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         margin-top: 1rem;
-        padding: 1rem;
+        z-index: 1000;
+        background: white;
+        height: 435px;
+        width: 242px;
+        border-radius: 7px;
     }
 }

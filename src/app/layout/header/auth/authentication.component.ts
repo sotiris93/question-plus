@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, OnInit, Output, Renderer2 } from '@angular/core';
 import { TabsModule } from 'primeng/tabs';
-import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
+import {  Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CanComponentDeactivate } from 'guards/can-deactivate-form.guard';
 import { Observable } from 'rxjs';
 import { LeavePageModalComponent } from "shared/leave-page-modal/leave-page-modal.component";
@@ -9,23 +9,47 @@ import { SignUpComponent } from "./sign-up/sign-up.component";
 
 @Component({
   selector: 'app-authentication',
-  imports: [TabsModule, RouterModule, LogInComponent, SignUpComponent],
+  imports: [TabsModule, LogInComponent, SignUpComponent],
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.scss',
 })
 export class AuthenticationComponent implements OnInit, CanComponentDeactivate {
   selectedTab: string = '0';
   isLogin: boolean = true;
+  isModalShown: boolean = false;
+  @Output() modalVisibilityEmitter = new EventEmitter<boolean>();
+  renderer2 = inject(Renderer2);
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
   ngOnInit(): void {
-    this.selectedTab = this.router.url.includes('auth/log-in') ? '1' : '0';
-    console.log('router:', this.router.url);
+    // this.selectedTab = this.router.url.includes('auth/log-in') ? '0' : '1';
     console.log('selected tab: ', this.selectedTab);
+    this.renderer2.setStyle(document.body, 'overflow', 'hidden');
+    this.renderer2.addClass(document.body, 'overflow-y-hidden');
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     console.log('canDeactivate called');
     return false;
+  }
+
+
+  closeModal() {
+    this.isModalShown = false;
+    this.modalVisibilityEmitter.emit(this.isModalShown);
+    this.renderer2.removeClass(document.body, 'overflow-y-hidden')
+  }
+
+  @HostListener('window:resize')
+  onWindowResize() {
+    if (window.innerWidth >= 768) {
+      this.renderer2.removeStyle(document.body, 'overflow');
+    }
+  }
+
+
+
+
+  ngOnDestroy(): void {
+    this.renderer2.removeClass(document.body, 'overflow-y-hidden')
   }
 }

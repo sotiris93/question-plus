@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SideBarComponent } from '../../shared/side-bar/side-bar.component';
 import { ProfileProgressComponent } from '../profile-progress/profile-progress.component';
 import { LandingPageService } from '../../services/landing-page.service';
@@ -10,7 +10,9 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from './carousel/carousel.component';
 import { forkJoin } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, RouterLink } from '@angular/router';
+import { FileUploadComponent } from "../../ui/file-upload/file-upload.component";
+import { SidebarService } from 'services/sidebar.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -20,7 +22,8 @@ import { RouterLink } from '@angular/router';
     ButtonModule,
     CommonModule,
     CarouselComponent,
-    RouterLink
+    RouterLink,
+    FileUploadComponent
 ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
@@ -29,6 +32,8 @@ export class LandingPageComponent implements OnInit {
   popularFlashCardsTemplate!: TemplateRef<any>;
   popularQuestionsTemplate!: TemplateRef<any>;
   popularTextbooksTemplate!: TemplateRef<any>;
+  test!: ActivatedRouteSnapshot;
+  route = inject(ActivatedRoute);
 
   @ViewChild('popularFlashCardsTemplate', { static: true }) set SetPopularFlashCardsTemplate(template: TemplateRef<any>) {
       this.popularFlashCardsTemplate = template;
@@ -74,9 +79,13 @@ export class LandingPageComponent implements OnInit {
     },
   ];
 
+  sidebarService = inject(SidebarService);
+  sidebarState: boolean = false;
+
   constructor(private landingPageService: LandingPageService) {}
   ngOnInit(): void {
       this.loadData();
+      this.sidebarService.sidebarState$.subscribe(state => this.sidebarState = state)
   }
 
   loadData() {

@@ -1,10 +1,12 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
   inject,
   OnInit,
+  Renderer2,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -15,48 +17,49 @@ import { ButtonModule } from 'primeng/button';
 import { BehaviorSubject, debounceTime, skip, Subject, switchMap, take } from 'rxjs';
 import { PopupRecommendationService } from '../../services/popup-recommendation.service';
 import { AuthService } from 'layout/header/auth/auth.service';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { PopHandlerComponent } from "../../shared/pop-handler/pop-handler.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
+import { AutofocusDirective } from 'directives/autofocus.directive';
+import { CommonModule } from '@angular/common';
+import { SubjectsPopupComponent } from "../../shared/subjects-popup/subjects-popup.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, ButtonModule, SelectModule, RouterModule, PopHandlerComponent, AuthenticationComponent],
+  imports: [FormsModule, ButtonModule, SelectModule, RouterModule, PopHandlerComponent, AuthenticationComponent, AutofocusDirective, CommonModule, SubjectsPopupComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
-  selectedCity: string | undefined;
+export class HeaderComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+    this.onResize()
+  }
   isPopupOpen: boolean = false;
   isFilterPopupOpen: boolean = false;
   @ViewChild('inputText') inputText: ElementRef | undefined;
-  @ViewChild('middleSection') middleSection!: ElementRef;
+  @ViewChild('mainLogo') mainLogo!: ElementRef;
+  @ViewChild('secondaryLogo') secondaryLogo!: ElementRef;
   private searchSubject = new BehaviorSubject<string>("");
   recommendedWords: string[] = [];
-  authService = inject(AuthService);
   isLoggedInSignal = signal(false);
   userSearchesSubject = new Subject<string>();
   hasSearched: boolean = false;
-  isSidebarOpen: boolean = true;
-  isAuthenticationModalShown: boolean = true;
-
+  isAuthenticationModalShown: boolean = false;
+  authService = inject(AuthService);
   popupRecommendationService = inject(PopupRecommendationService);
   sidebarService = inject(SidebarService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  renderer2 = inject(Renderer2);
+  example: string = '';
+  currentWindowWidth!: number;
 
   ngOnInit(): void {
-    this.getAuthStatus();
+    this.currentWindowWidth = window.innerWidth;
+    this.isLoggedInSignal = this.authService.authState;
     this.getRecommendation();
-    this.sidebarService.sidebarState$.subscribe(state => this.isSidebarOpen = state);
-
-    this.userSearchesSubject.pipe(take(1)).subscribe(()=> {
-      this.hasSearched = true;
-
-      setTimeout(()=> {
-       this.hasSearched = false;
-      }, 3000)
-    })
   }
 
   @HostListener('document:click')
@@ -68,7 +71,6 @@ export class HeaderComponent implements OnInit {
   onSearch(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchSubject.next(input.value);
-    this.userSearchesSubject.next(input.value);
   }
 
   getRecommendation() {
@@ -97,13 +99,23 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
-  getAuthStatus() {
-    this.isLoggedInSignal = this.authService.authState;
-  }
-
   toggleSidebar(): void {
     console.log('isSidebarOpen called')
-    this.isSidebarOpen = !this.isSidebarOpen;
-    this.sidebarService.changeState(this.isSidebarOpen);
+    this.sidebarService.toggleSidebar();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    const width = window.innerWidth;
+    if(width > 960 && !this.isLoggedInSignal()) {
+      this.renderer2.setStyle(this.mainLogo.nativeElement, 'display', 'flex');
+      this.renderer2.removeStyle(this.secondaryLogo.nativeElement, 'display')
+    } else if (width < 960 && !this.isLoggedInSignal()) {
+      this.renderer2.setStyle(this.secondaryLogo.nativeElement, 'display', 'flex');
+      this.renderer2.removeStyle(this.mainLogo.nativeElement, 'display');
+    } else if (this.isLoggedInSignal()) {
+      this.renderer2.setStyle(this.secondaryLogo.nativeElement, 'display', 'flex');
+      this.renderer2.removeStyle(this.mainLogo.nativeElement, 'display');
+    }
   }
 }

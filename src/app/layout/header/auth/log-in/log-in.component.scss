@@ -1,8 +1,3 @@
-body {
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-}
-
 .login-container {
   position: relative;
   width: 100%;
@@ -75,6 +70,45 @@ body {
       column-gap: 2rem;
     }
 
+    .password {
+      position: relative;
+
+      .upper-section {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+          margin-top: 8px;
+          color: rgb(67, 86, 255);
+          font-weight: bold;
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+
+      .lower-section {
+        position: relative;
+        width: 100%;
+
+        .pi-eye {
+          position: absolute;
+          right: 25px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 20px;
+          color: rgb(88, 99, 128);
+          font-weight: bold;
+          cursor: pointer;
+          padding: 0.5rem;
+          border-radius: 50%;
+
+          &:hover {
+            background: rgb(228, 227, 227);
+          }
+        }
+      }
+    }
+
     .email {
       margin-bottom: 2rem;
     }
@@ -88,6 +122,7 @@ body {
 
     input {
       background: #f6f7fb;
+      width: 100%;
       font-size: 16px;
       padding: 0.9rem;
       border-radius: 10px;
@@ -176,25 +211,12 @@ body {
 
   @media screen and (min-width: 620px) {
     margin-top: 1.7rem;
-    .social-media {
-      a {
-        .google,
-        .facebook,
-        .apple {
-          height: 62px;
-        }
+    .social-media a {
+      .google,
+      .facebook,
+      .apple {
+        height: 62px;
       }
     }
-  }
-
-  @media screen and (min-width: 620px) {
-    // margin-right: 90px;
-    // margin-left: 90px;
-  }
-}
-
-::ng-deep {
-  .p-ripple.p-tab.p-component {
-    font-size: 21px;
   }
 }

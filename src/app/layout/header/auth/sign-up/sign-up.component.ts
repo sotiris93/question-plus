@@ -35,6 +35,7 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
   isReceiveUpdates: boolean = false;
   isAcceptTerms: boolean = false;
   isRequestSent: boolean = false;
+  showPassword: boolean = false;
   months: string[] = [];
   days: number[] = [];
   years: number[] = [];

@@ -1,11 +1,8 @@
 <main>
   <div class="login-container">
-   
     <div class="social-media">
       <!-- create google account -->
-      <a
-        href=""
-      >
+      <a href="">
         <button class="google">
           <img
             src="assets/svg/google.svg"
@@ -17,9 +14,7 @@
         </button>
       </a>
       <!-- create facebook account -->
-      <a
-        href=""
-      >
+      <a href="">
         <button class="facebook">
           <img
             src="assets/svg/facebook.svg"
@@ -30,10 +25,8 @@
           Log in Facebook
         </button>
       </a>
-<!-- create apple account -->
-      <a
-        href=""
-      >
+      <!-- create apple account -->
+      <a href="">
         <button class="apple">
           <img
             src="assets/svg/apple.svg"
@@ -64,44 +57,64 @@
           required
         />
       </div>
-     
 
       <div class="password">
-        <label>Password</label>
-        <input
-          type="text"
-          [(ngModel)]="password"
-          name="email"
-          placeholder="Enter your password"
-          aria-placeholder="Enter your password"
-          #passwordField="ngModel"
-          minlength="8"
-          required
-        />
+        <div class="upper-section">
+          <label>Password</label>
+          <a>Forgot password</a>
+        </div>
+
+        <div class="lower-section">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            name="email"
+            placeholder="Enter your password"
+            aria-placeholder="Enter your password"
+            #passwordField="ngModel"
+            minlength="8"
+            required
+          />
+
+          <i class="pi pi-eye" (click)="showPassword = !showPassword"></i>
+        </div>
       </div>
-     
 
       <p class="terms">
-        By clicking Log in, you accept Question plus' <a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service and Privacy</a></p>
+        By clicking Log in, you accept Question plus'
+        <a class="terms-of-service" [routerLink]="['', 'terms-of-service']">
+          Terms of Service and Privacy</a
+        >
+      </p>
 
-        <div class="submit-button">
-          @if (isRequestSent) {
-            <div class="form-overlay"></div>
-          }
-          <button class="submit" type="submit" [disabled]="isRequestSent || form.invalid"
-          [ngStyle]="{'cursor': isRequestSent ? 'not-allowed' : 'pointer'}">Log in</button>
-           
-            @if (isRequestSent) {
-              <div class="spinner">
-                <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
-              </div>
-            }
+      <div class="submit-button">
+        @if (isRequestSent) {
+        <div class="form-overlay"></div>
+        }
+        <button
+          class="submit"
+          type="submit"
+          [disabled]="isRequestSent || form.invalid"
+          [ngStyle]="{ cursor: (isRequestSent || form.invalid)? 'not-allowed' : 'pointer' }"
+        >
+          Log in
+        </button>
+
+        @if (isRequestSent) {
+        <div class="spinner">
+          <p-progress-spinner
+            strokeWidth="8"
+            fill="transparent"
+            animationDuration=".5s"
+            [style]="{ width: '50px', height: '50px' }"
+          />
         </div>
-       
-        <button class="sign-up" type="text">New to Question Plus? Create your account</button>
-        
-    </form>
+        }
+      </div>
 
-   
+      <button class="sign-up" type="text">
+        New to Question Plus? Create your account
+      </button>
+    </form>
   </div>
 </main>

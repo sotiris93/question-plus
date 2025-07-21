@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem; 
+  margin-right: 1rem;
+}
+
+.subjects-container {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+    font-size: 15px;
+    font-weight: 600;
+
+  img {
+    transform: rotateZ(90deg);
+  }
+}

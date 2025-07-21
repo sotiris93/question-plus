@@ -23,7 +23,7 @@
           </p-tablist>
         </p-tabs>
         @if (isLogin) {
-          <app-log-in></app-log-in>
+          <app-log-in (closeModalEmitter)="closeModal()"></app-log-in>
         } @else {
           <app-sign-up></app-sign-up>
         }

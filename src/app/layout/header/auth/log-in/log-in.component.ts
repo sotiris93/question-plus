@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -17,6 +17,8 @@ export class LogInComponent implements OnInit {
   isRequestSent: boolean = false;
   email: string = '';
   password: string = '';
+  showPassword: boolean = false;
+  @Output() closeModalEmitter: EventEmitter<boolean> = new EventEmitter(false);
 
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class LogInComponent implements OnInit {
         next: () => {
           console.log('Login successful');
           this.router.navigate(['/my-library'], { replaceUrl: true });
+          this.closeModalEmitter.emit(true);
         },
         error: (error) => {
           console.error('Error logging in:', error);

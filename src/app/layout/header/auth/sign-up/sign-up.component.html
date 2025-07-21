@@ -1,10 +1,7 @@
 <div class="sign-up-container">
-  
   <div class="social-media">
     <!-- create google account -->
-    <a class="google-link"
-      href=""
-    >
+    <a class="google-link" href="">
       <button class="google">
         <img
           src="assets/svg/google.svg"
@@ -12,13 +9,12 @@
           height="23"
           width="23"
         />
-       <p>Continue with Google</p> 
+        <p>Continue with Google</p>
       </button>
     </a>
 
     <!-- create google account -->
-    <a
-      href="">
+    <a href="">
       <button class="facebook">
         <img
           src="assets/svg/facebook.svg"
@@ -31,7 +27,6 @@
   </div>
 
   <div class="email-data">
-    
     <div class="or-email">
       <hr />
       <span>or email</span>
@@ -115,16 +110,19 @@
       </div>
 
       }
-      <label class="password"> Password </label>
-      <input
-        type="password"
-        name="password"
-        placeholder="●●●●●●●●"
-        [(ngModel)]="password"
-        #passwordField="ngModel"
-        minlength="8"
-        required=""
-      />
+      <div class="password-section">
+        <label class="password"> Password </label>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          placeholder="●●●●●●●●"
+          [(ngModel)]="password"
+          #passwordField="ngModel"
+          minlength="8"
+          required=""
+        />
+        <i class="pi pi-eye" (click)="showPassword = !showPassword"></i>
+      </div>
 
       @if (passwordField.invalid && passwordField.touched) {
       <div class="error">
@@ -146,7 +144,6 @@
         />
         I want to receive news, updates and emails from Question plus
       </label>
-    
 
       <label class="policy">
         <input
@@ -155,7 +152,7 @@
           name="termsofService"
           value="terms"
           [(ngModel)]="isAcceptTerms"
-          #termsField = "ngModel"
+          #termsField="ngModel"
           required
         />
         <!-- <div class="error">
@@ -163,27 +160,36 @@
             <p>You must accept the Terms of Service</p>
           }
         </div> -->
-       
+
         <pre>I accept Questions Plus'<a class="terms-of-service" [routerLink]="['', 'terms-of-service']"> Terms of Service</a
         ></pre>
       </label>
 
       <div class="sign-up">
         @if (isRequestSent) {
-          <div class="form-overlay"></div>
+        <div class="form-overlay"></div>
         }
-        <button class="submit" type="submit" [disabled]="form.invalid || isRequestSent" [class.disabled]="form.invalid">
+        <button
+          class="submit"
+          type="submit"
+          [disabled]="form.invalid || isRequestSent"
+          [class.disabled]="form.invalid"
+        >
           Sign up
         </button>
-        
-        
+
         @if (isRequestSent) {
-          <div class="spinner">
-            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
-          </div>
+        <div class="spinner">
+          <p-progress-spinner
+            strokeWidth="8"
+            fill="transparent"
+            animationDuration=".5s"
+            [style]="{ width: '50px', height: '50px' }"
+          />
+        </div>
         }
       </div>
-     
+
       <button class="login">Already have an account? Log in</button>
     </form>
   </div>

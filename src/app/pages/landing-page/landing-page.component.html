@@ -3,7 +3,7 @@
   <!-- move it to the layout component -->
   <app-side-bar></app-side-bar>
 </div>
-<main>
+<main [class.sidebar-open]="sidebarState">
   <app-file-upload></app-file-upload>
 
   <!-- <div class="profile-progress">

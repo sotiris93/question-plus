@@ -5,122 +5,137 @@
         <i class="pi pi-bars"></i>
       </button>
       <div class="logo" [routerLink]="['']">
-        <h1>Q</h1>
+        <h1 class="main-logo" #mainLogo>Question Plus</h1>
+        <h1 class="secondary-logo" #secondaryLogo>Q</h1>
       </div>
 
       @if (!isLoggedInSignal()) {
-      <app-pop-handler class="study-tools-popup">
-        <div button_ui class="button-ui">
-          Study tools
-          <img
-            src="assets/svg/right-arrow.svg"
-            alt="down arrow"
-            height="20"
-            width="20"
-          />
-        </div>
-        <div popup_ui class="popup-ui">
-          
-         <div class="students-data">
-          <h4>Students</h4>
-          <a class="category">
-            <img src="assets/svg/flashcards.svg" alt="flashcards" height="20" width="20">
-            <p>Flashcards</p>
-          </a>
+      <div class="popups-container">
+        <app-pop-handler class="study-tools-popup">
+          <div button_ui class="button-ui">
+            <span>Study tools</span>
+            <img
+              src="assets/svg/right-arrow.svg"
+              alt="down arrow"
+              height="15"
+              width="15"
+            />
+          </div>
+          <div popup_ui class="popup-ui">
+            <div class="students-data">
+              <h4>Students</h4>
+              <a class="category">
+                <img
+                  src="assets/svg/flashcards.svg"
+                  alt="flashcards"
+                  height="20"
+                  width="20"
+                />
+                <p>Flashcards</p>
+              </a>
 
-          <a class="category">
-            <img src="assets/svg/learn.svg" alt="learn" height="20" width="20">
-            <p>Learn</p>
-          </a>
+              <a class="category">
+                <img
+                  src="assets/svg/learn.svg"
+                  alt="learn"
+                  height="20"
+                  width="20"
+                />
+                <p>Learn</p>
+              </a>
 
-          <a class="category">
-            <img src="assets/svg/study.svg" alt="study" height="20" width="20">
-            <p>Study Guides</p>
-          </a>
+              <a class="category">
+                <img
+                  src="assets/svg/study.svg"
+                  alt="study"
+                  height="20"
+                  width="20"
+                />
+                <p>Study Guides</p>
+              </a>
 
-          <a class="category">
-            <img src="assets/svg/test.svg" alt="test" height="20" width="20">
-            <p>Test</p>
-          </a>
+              <a class="category">
+                <img
+                  src="assets/svg/test.svg"
+                  alt="test"
+                  height="20"
+                  width="20"
+                />
+                <p>Test</p>
+              </a>
 
-          <a class="category">
-            <img src="assets/svg/solutions.svg" alt="solutions" height="20" width="20">
-            <p>Expert Solutions</p>
-          </a>
-        </div>
+              <a class="category">
+                <img
+                  src="assets/svg/solutions.svg"
+                  alt="solutions"
+                  height="20"
+                  width="20"
+                />
+                <p>Expert Solutions</p>
+              </a>
+            </div>
 
-        <hr>
+            <hr />
 
-        <div class="teachers-data">
-           <h4>Teachers</h4>
-          <a class="category">
-            <img src="assets/svg/live.svg" alt="live" height="20" width="20">
-            <p>Live</p>
-          </a>
+            <div class="teachers-data">
+              <h4>Teachers</h4>
+              <a class="category">
+                <img
+                  src="assets/svg/live.svg"
+                  alt="live"
+                  height="20"
+                  width="20"
+                />
+                <p>Live</p>
+              </a>
 
-          <a class="category">
-            <img src="assets/svg/blast.svg" alt="blast" height="20" width="20">
-            <p>Blast</p>
-          </a>
+              <a class="category">
+                <img
+                  src="assets/svg/blast.svg"
+                  alt="blast"
+                  height="20"
+                  width="20"
+                />
+                <p>Blast</p>
+              </a>
 
-          <a class="category">
-            <img src="assets/svg/categories.svg" alt="categories" height="20" width="20">
-            <p>Categories</p>
-          </a>
-        </div>
-        </div>
-        
-       
-      </app-pop-handler>
+              <a class="category">
+                <img
+                  src="assets/svg/categories.svg"
+                  alt="categories"
+                  height="20"
+                  width="20"
+                />
+                <p>Categories</p>
+              </a>
+            </div>
+          </div>
+        </app-pop-handler>
+
+        <app-subjects-popup>
+          <div button_ui class="">
+            Study tools
+            <img
+              src="assets/svg/right-arrow.svg"
+              alt="down arrow"
+              height="20"
+              width="20"
+            />
+          </div>
+        </app-subjects-popup>
+      </div>
+
       }
     </div>
-
-    <div class="middle-section" tabindex="0">
-      <div
-        class="search"
-        (click)="isFilterPopupOpen = true; $event.stopPropagation()"
-      >
-        <img
-          src="assets/svg/search.svg"
-          alt="search filter"
-          height="19"
-          width="19"
-        />
-        <input
-          #inputText
-          type="text"
-          (input)="onSearch($event)"
-          placeholder="Search for flashcards"
-        />
-      </div>
-
-      @if (hasSearched) {
-      <div class="search-notification">
-        <p>Search activity detected</p>
-      </div>
-      } @if (isFilterPopupOpen) {
-      <div
-        class="filter-popup"
-        [style.display]="recommendedWords.length > 0 ? 'block' : 'none'"
-      >
-        @for (word of recommendedWords; track $index) {
-        <div class="recommendation">
-          <img
-            src="assets/svg/search.svg"
-            alt="search for {{ word }}"
-            height="20"
-            width="20"
-          />
-          <p>{{ word }}</p>
-        </div>
-        }
-      </div>
-      }
-    </div>
+    <ng-container
+      [ngTemplateOutlet]="middleSection"
+      [ngTemplateOutletContext]="{ isMobile: false }"
+    >
+    </ng-container>
 
     <div class="right-section">
       @if(isLoggedInSignal()) {
-      <div class="create-icon">
+      <div class="create-icon" aria-label="create">
         <button>
           <i class="pi pi-plus"></i>
         </button>
@@ -132,7 +147,11 @@
       </div>
 
       <div class="circle-container" (click)="$event.stopPropagation()">
-        <button class="circle" (click)="isPopupOpen = true">
+        <button
+          class="circle"
+          aria-label="profile"
+          (click)="isPopupOpen = true"
+        >
           <img
             src="assets/svg/user.svg"
             alt="profile picture"
@@ -155,53 +174,108 @@
               </div>
             </div>
           </div>
-          <hr>
+          <hr />
 
           <div class="options">
-            <button>
+            <button aria-label="achievements">
               <i class="pi pi-trophy"></i>
               Achievements
             </button>
-            <button>
+            <button aria-label="settings">
               <i class="pi pi-cog"></i>
               Settings
             </button>
-            <button>
+            <button aria-label="dark mode">
               <i class="pi pi-moon"></i>
               Dark Mode
             </button>
             <hr />
-            <button (click)="logout()">Log out</button>
+            <button aria-label="log out" (click)="logout()">Log out</button>
             <hr />
             <button
+              aria-label="privacy policy"
               [routerLink]="['', 'privacy']"
               routerLinkActive="router-link-active"
             >
               Privacy policy
             </button>
-            <button>Help and feedback</button>
-            <button>Upgrade</button>
+            <button aria-label="help and feedback">Help and feedback</button>
+            <button aria-label="upgrade">Upgrade</button>
           </div>
-          
         </div>
         }
       </div>
 
       } @else {
       <div class="create-section">
-        <button>
+        <button aria-label="create">
           <i class="pi pi-plus"></i>
           <span>Create</span>
         </button>
       </div>
-      
-      <button class="login" (click)="isAuthenticationModalShown = true">
+
+      <button
+        aria-label="log in"
+        class="login"
+        (click)="isAuthenticationModalShown = true"
+      >
         Log in
       </button>
-    }
+      }
     </div>
   </div>
+
+  <ng-container
+    [ngTemplateOutlet]="middleSection"
+    [ngTemplateOutletContext]="{ isMobile: true }"
+  >
+  </ng-container>
 </header>
 @if (isAuthenticationModalShown) {
-  <app-authentication (modalVisibilityEmitter)="isAuthenticationModalShown = $event"></app-authentication>
+<app-authentication
+  (modalVisibilityEmitter)="isAuthenticationModalShown = $event"
+></app-authentication>
 }
+
+<ng-template #middleSection let-isMobile="isMobile">
+  <div class="middle-section {{ isMobile ? 'mobile' : 'desktop' }}">
+    <div
+      class="search"
+      (click)="isFilterPopupOpen = true; $event.stopPropagation()"
+    >
+      <img
+        src="assets/svg/search.svg"
+        alt="search filter"
+        height="19"
+        width="19"
+        (click)="inputText.focus()"
+      />
+      <input
+        #inputText
+        type="text"
+        (input)="onSearch($event)"
+        placeholder="Search for flashcards"
+        appAutofocus
+      />
+    </div>
+
+     @if (isFilterPopupOpen) {
+    <div
+      class="filter-popup"
+      [style.display]="recommendedWords.length > 0 ? 'block' : 'none'"
+    >
+      @for (word of recommendedWords; track $index) {
+      <div class="recommendation">
+        <img
+          src="assets/svg/search.svg"
+          alt="search for {{ word }}"
+          height="20"
+          width="20"
+        />
+        <p>{{ word }}</p>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</ng-template>

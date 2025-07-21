@@ -9,7 +9,8 @@ export class SidebarService {
   private sidebarStateSubject = new BehaviorSubject<boolean>(this.initialState);
   sidebarState$ = this.sidebarStateSubject.asObservable();
 
-  changeState(state: boolean) {
+  toggleSidebar() {
+    let state = !this.sidebarStateSubject.getValue();
     localStorage.setItem('sidebarState', JSON.stringify(state));
     this.sidebarStateSubject.next(state);
   }

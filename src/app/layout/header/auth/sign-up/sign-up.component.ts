@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SelectModule } from 'primeng/select';
@@ -40,6 +40,8 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
   days: number[] = [];
   years: number[] = [];
   formData: FormData = new FormData();
+  @Output() closeModalEmitter: EventEmitter<boolean> = new EventEmitter(false);
+
 
   constructor(private authService: AuthService) {}
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
@@ -101,6 +103,7 @@ export class SignUpComponent implements OnInit, CanComponentDeactivate {
         next: (response) => {
           console.log(response);
           this.isAuthenticated = true;
+          this.closeModalEmitter.emit(true);
         },
         error: (error) => {
           console.error(error);

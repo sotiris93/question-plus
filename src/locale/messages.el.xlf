@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="recents" datatype="html">
+        <source>Recents</source>
+        <target>Πρόσφατα</target>
+      </trans-unit>
+
+       <trans-unit id="login" datatype="html">
+        <source>Log in</source>
+        <target>Σύνδεση</target>
+      </trans-unit>
+
+       <trans-unit id="create" datatype="html">
+        <source>Create</source>
+        <target>Δημιουργία</target>
+      </trans-unit>
+
+      <trans-unit id="searchForFlashcards" datatype="html">
+        <source>Search For Flashcards</source>
+        <target>Αναζήτησε εκπαιδευτική κάρτα</target>
+      </trans-unit>
+
+    </body>
+  </file>
+
+</xliff>

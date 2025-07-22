@@ -210,7 +210,7 @@
       <div class="create-section">
         <button aria-label="create">
           <i class="pi pi-plus"></i>
-          <span>Create</span>
+          <span i18n="@@create">Create</span>
         </button>
       </div>
 
@@ -218,6 +218,7 @@
         aria-label="log in"
         class="login"
         (click)="isAuthenticationModalShown = true"
+        i18n="@@login"
       >
         Log in
       </button>
@@ -255,6 +256,7 @@
         type="text"
         (input)="onSearch($event)"
         placeholder="Search for flashcards"
+        i18n-placeholder="@@searchForFlashcards"
         appAutofocus
       />
     </div>

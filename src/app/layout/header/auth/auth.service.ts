@@ -32,11 +32,11 @@ export class AuthService {
     .pipe(
       tap((response) => {
         if (response.token) {
-          console.log('response: ', response);
+          console.log('Signup successful:', response);
           
           this.authState.set(true);
           this.cookieService.set('token', response.token, {path: '/'});
-          this.cookieService.set('username', response.token, {path: '/'});
+          this.cookieService.set('username', response.username, {path: '/'});
         }
       }
     ),
@@ -48,8 +48,8 @@ export class AuthService {
 
   login(data: { password: string; email: string }) {
     const apiUrl = `${this.url}/login`;
-    console.log('username', data.password);
-    console.log('password', data.email);
+    console.log('email', data.email);
+    console.log('password', data.password);
     
     return this.http
       .post<{ token: string; username: string }>(apiUrl, data)

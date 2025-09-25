@@ -437,30 +437,31 @@
           <hr />
 
           <div class="options">
-            <button aria-label="achievements">
+            <button aria-label="achievements" class="option">
               <i class="pi pi-trophy"></i>
               Achievements
             </button>
-            <button aria-label="settings">
+            <button aria-label="settings" class="option">
               <i class="pi pi-cog"></i>
               Settings
             </button>
-            <button aria-label="dark mode">
+            <button aria-label="dark mode" class="option">
               <i class="pi pi-moon"></i>
               Dark Mode
             </button>
             <hr />
-            <button aria-label="log out" (click)="logout()">Log out</button>
+            <button aria-label="log out" (click)="logout()" class="option">Log out</button>
             <hr />
             <button
               aria-label="privacy policy"
               [routerLink]="['', 'privacy']"
               routerLinkActive="router-link-active"
+              class="option"
             >
               Privacy policy
             </button>
-            <button aria-label="help and feedback">Help and feedback</button>
-            <button aria-label="upgrade">Upgrade</button>
+            <button aria-label="help and feedback" class="option">Help and feedback</button>
+            <button aria-label="upgrade" class="option">Upgrade</button>
           </div>
         </div>
         }

@@ -112,15 +112,275 @@
           </div>
         </app-pop-handler>
 
-        <app-subjects-popup>
-          <div button_ui class="">
-            Study tools
+        <app-subjects-popup class="study-tools-popup">
+          <div button_ui class="button-ui">
+            <span>Subjects</span>
             <img
               src="assets/svg/right-arrow.svg"
               alt="down arrow"
-              height="20"
-              width="20"
+              height="15"
+              width="15"
             />
+          </div>
+          <div popup_ui class="popup-ui">
+            <div class="left-side">
+              
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('exams')"
+                [class.selected-category]="selectedCategory === 'exams'"
+              >
+                <img
+                  src="assets/svg/exam.svg"
+                  alt="exams"
+                  height="20"
+                  width="20"
+                />
+                <p>Exams</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('literature')"
+                [class.selected-category]="selectedCategory === 'literature'"
+              >
+                <img
+                  src="assets/svg/literature.svg"
+                  alt="literature"
+                  height="20"
+                  width="20"
+                />
+                <p>Literature</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('artsAndHumanities')"
+                [class.selected-category]="selectedCategory === 'artsAndHumanities'"
+              >
+                <img
+                  src="assets/svg/arts.svg"
+                  alt="arts and humanities"
+                  height="20"
+                  width="20"
+                />
+                <p>Arts and Humanities</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('languages')"
+                [class.selected-category]="selectedCategory === 'languages'"
+              >
+                <img
+                  src="assets/svg/languages.svg"
+                  alt="languages"
+                  height="20"
+                  width="20"
+                />
+                <p>Languages</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('math')"
+                [class.selected-category]="selectedCategory === 'math'"
+              >
+                <img
+                  src="assets/svg/math.svg"
+                  alt="math"
+                  height="20"
+                  width="20"
+                />
+                <p>Math</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('science')"
+                [class.selected-category]="selectedCategory === 'science'"
+              >
+                <img
+                  src="assets/svg/science.svg"
+                  alt="science"
+                  height="20"
+                  width="20"
+                />
+                <p>Science</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('socialScience')"
+                [class.selected-category]="selectedCategory === 'socialScience'"
+              >
+                <img
+                  src="assets/svg/socialScience.svg"
+                  alt="social science"
+                  height="20"
+                  width="20"
+                />
+                <p>Social Science</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+
+              <a
+                href=""
+                class="category"
+                (mouseenter)="onCategoryEnter('other')"
+                [class.selected-category]="selectedCategory === 'other'"
+              >
+                <img
+                  src="assets/svg/other.svg"
+                  alt="other"
+                  height="20"
+                  width="20"
+                />
+                <p>Other</p>
+                <img
+                  src="assets/svg/right-arrow.svg"
+                  alt="right arrow"
+                  height="15"
+                  width="15"
+                  class="right-arrow"
+                />
+              </a>
+            </div>
+
+            <div class="middle-side"></div>
+
+            <div class="right-side">
+              @if(selectedCategory === 'exams') {
+              <div class="subcategories">
+                <a>IELTS</a>
+                <a>ITOEFL</a>
+                <a>TOEIC</a>
+                <a class="view-all">View all</a>
+              </div>
+              } @if(selectedCategory === 'literature') {
+              <div class="subcategories">
+                <a>Novels</a>
+                <a>Poems</a>
+                <a>Plays</a>
+              </div>
+              } @if(selectedCategory === 'artsAndHumanities') {
+              <div class="subcategories">
+                <a>Philosophy</a>
+                <a>History</a>
+                <a>English</a>
+                <a>Film and TV</a>
+                <a>Music</a>
+                <a>Dance</a>
+                <a>Theater</a>
+                <a class="view-all">View all</a>
+              </div>
+              } @if(selectedCategory === 'languages') {
+              <div class="subcategories">
+                <a>French</a>
+                <a>Spanish</a>
+                <a>German</a>
+                <a>latin</a>
+                <a>English</a>
+                <a class="view-all">View all</a>
+              </div>
+              } @if(selectedCategory === 'math') {
+
+              <div class="subcategories">
+                <a>Arithmetic</a>
+                <a>Geometry</a>
+                <a>Algebra</a>
+                <a>Statistics</a>
+                <a>Calculus</a>
+                <a>Math Foundations</a>
+                <a>Probability</a>
+                <a class="view-all">View all</a>
+              </div>
+              } @if(selectedCategory === 'science') {
+              <div class="subcategories">
+                <a>Biology</a>
+                <a>Chemistry</a>
+                <a>Physics</a>
+                <a>Medicine</a>
+                <a>Computer Science</a>
+                <a>Engineering</a>
+                <a>Earth Science</a>
+                <a class="view-all">View all</a>
+              </div>
+              } @if(selectedCategory === 'socialScience') {
+
+              <div class="subcategories">
+                <a>Psychology</a>
+                <a>Business</a>
+                <a>Sociology</a>
+                <a>Economics</a>
+                <a>Human Geography</a>
+                <a>Political Science</a>
+                <a class="view-all">View all</a>
+              </div>
+              } @if(selectedCategory === 'other') {
+              <div class="subcategories">
+                <a>Hobbies</a>
+                <a>Sports</a>
+                <a>Computer Skills</a>
+                <a class="view-all">View all</a>
+              </div>
+              }
+            </div>
           </div>
         </app-subjects-popup>
       </div>
@@ -261,7 +521,7 @@
       />
     </div>
 
-     @if (isFilterPopupOpen) {
+    @if (isFilterPopupOpen) {
     <div
       class="filter-popup"
       [style.display]="recommendedWords.length > 0 ? 'block' : 'none'"

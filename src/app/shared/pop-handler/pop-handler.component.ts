@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-pop-handler',
@@ -10,8 +10,14 @@ export class PopHandlerComponent {
 
   isPopupVisible: boolean = false;
 
-  @HostListener('window:click')
-  onWindowClick() {
+  constructor(private elRef: ElementRef) {}
+
+  @HostListener('window:click', ['$event'])
+  onWindowClick(event: Event) {
+    // If the click happened inside this component, ignore it
+    if (this.elRef.nativeElement.contains(event.target)) {
+      return;
+    }
     this.isPopupVisible = false;
   }
 }

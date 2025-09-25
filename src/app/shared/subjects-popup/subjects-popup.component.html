@@ -1,5 +1,16 @@
 <div class="subjects-container">
-    <span>Subjects</span>
-    <img src="assets/svg/right-arrow.svg" alt="down arrow" height="15" width="15" />
+    <button (click)="isPopupVisible = !isPopupVisible">
+    <ng-content select="[button_ui]"></ng-content>
+  </button>
+
+  @if (isPopupVisible) {
+  <div class="popup-ui">
+    
+    <ng-content select="[popup_ui]">
+      
+    </ng-content>
+  </div>
+  }
+    <!-- <img src="assets/svg/right-arrow.svg" alt="down arrow" height="15" width="15" /> -->
 </div>
 

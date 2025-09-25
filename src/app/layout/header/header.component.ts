@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   renderer2 = inject(Renderer2);
   example: string = '';
   currentWindowWidth!: number;
+  selectedCategory: string = "exams";
 
   ngOnInit(): void {
     this.currentWindowWidth = window.innerWidth;
@@ -117,5 +118,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.renderer2.setStyle(this.secondaryLogo.nativeElement, 'display', 'flex');
       this.renderer2.removeStyle(this.mainLogo.nativeElement, 'display');
     }
+  }
+
+  onCategoryEnter(category: string) {
+    this.selectedCategory = category;
   }
 }

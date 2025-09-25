@@ -12,7 +12,26 @@
     font-size: 15px;
     font-weight: 600;
 
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .popup-ui {
+      background: yellow;
+      position: absolute;
+      top: 100%;
+      background:white;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    }
+
   img {
     transform: rotateZ(90deg);
+  }
+
+  .popup-ui {
+    z-index: 1000;
   }
 }
